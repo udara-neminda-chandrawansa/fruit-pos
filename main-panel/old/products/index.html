@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application | Product Management</title>
+    <link rel="icon" href="../../images/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles/common.css">
+</head>
+
+<body class="min-h-dvh flex flex-col max-lg:h-fit">
+    <!--Nav-->
+    <div class="nav bg-basic w-full h-[17dvh] max-sm:py-6 rounded-b-full flex justify-between items-center max-lg:justify-center max-lg:flex-col">
+        <span class="flex items-center gap-3 ml-20 max-lg:ml-0 max-sm:scale-75">
+            <button onclick="history.go(-1);" class="rounded-full w-[50px] aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
+                <img src="../../images/common/back.svg" alt="go-back" class="scale-75">
+            </button>
+        </span>
+        <span class="flex items-center gap-3 mr-20 max-lg:mr-0 max-sm:scale-75">
+            <h3 class="text-2xl max-md:text-sm text-white">Welcome Sahan Ranawaka</h3>
+            <button onclick="window.location.href = '../../../';" class="rounded-full w-[50px] aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
+                <img src="../../images/common/logout.svg" alt="logout" class="scale-[70%]">
+            </button>
+        </span>
+    </div>
+
+    <!--content-->
+    <div class="flex flex-col flex-grow">
+        <!--breadcrumbs-->
+        <div class="px-12 max-sm:px-6 py-5">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li class="inline-flex items-center">
+                        <p class="inline-flex items-center text-sm font-medium text-gray-700">
+                            <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                            </svg>
+                            Main Panel
+                        </p>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                            </svg>
+                            <p class="ms-1 text-sm font-medium text-gray-700 md:ms-2">Product Management</p>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+
+        <!-- Product Form -->
+        <div class="px-12 max-sm:px-6 py-5">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-bold mb-4">Add/Edit Product</h2>
+                <form id="productForm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Left Column -->
+                        <div>
+                            <!-- Product Name -->
+                            <div class="mb-4">
+                                <label for="productName" class="block text-sm font-medium text-gray-700 mb-1">Product Name *</label>
+                                <input type="text" id="productName" required
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            </div>
+
+                            <!-- Product Code -->
+                            <div class="mb-4">
+                                <label for="productCode" class="block text-sm font-medium text-gray-700 mb-1">Product Code</label>
+                                <input type="text" id="productCode"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            </div>
+
+                            <!-- Model Number -->
+                            <div class="mb-4">
+                                <label for="modelNumber" class="block text-sm font-medium text-gray-700 mb-1">Model Number</label>
+                                <input type="text" id="modelNumber"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            </div>
+
+                            <!-- Supplier -->
+                            <div class="mb-4">
+                                <label for="supplier" class="block text-sm font-medium text-gray-700 mb-1">Supplier</label>
+                                <select id="supplier"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                    <option value="">Select Supplier</option>
+                                    <option value="1">TechSuppliers Inc.</option>
+                                    <option value="2">PeriPharma Co.</option>
+                                    <option value="3">DisplayTech Ltd.</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div>
+                            <!-- Purchase Price -->
+                            <div class="mb-4">
+                                <label for="purchasePrice" class="block text-sm font-medium text-gray-700 mb-1">Purchase Price</label>
+                                <input type="number" id="purchasePrice" step="0.01"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            </div>
+
+                            <!-- Selling Price -->
+                            <div class="mb-4">
+                                <label for="sellingPrice" class="block text-sm font-medium text-gray-700 mb-1">Selling Price</label>
+                                <input type="number" id="sellingPrice" step="0.01"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            </div>
+
+                            <!-- Warranty Section -->
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label for="warrantyDuration" class="block text-sm font-medium text-gray-700 mb-1">Warranty Duration</label>
+                                    <input type="number" id="warrantyDuration"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                </div>
+                                <div>
+                                    <label for="warrantyType" class="block text-sm font-medium text-gray-700 mb-1">Warranty Type</label>
+                                    <select id="warrantyType"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                        <option value="">Select Type</option>
+                                        <option value="days">Days</option>
+                                        <option value="months">Months</option>
+                                        <option value="years">Years</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Free Issue -->
+                            <div class="flex items-center mb-4">
+                                <input id="freeIssue" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                                <label for="freeIssue" class="ms-2 text-sm font-medium text-gray-700">Free Issue Product</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Buttons -->
+                    <div class="flex justify-end gap-3 mt-6">
+                        <button type="button" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100">Cancel</button>
+                        <button type="submit" class="px-6 py-2 bg-basic text-white rounded-lg hover:bg-opacity-90">Save Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Product Table -->
+        <div class="px-12 max-sm:px-6 py-5 overflow-y-auto bg-white flex flex-col">
+            <div class="relative overflow-x-auto">
+                <table id="productTable" class="w-full text-sm text-left rtl:text-right text-gray-500">
+                    <thead class="text-xs text-white uppercase bg-basic">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 rounded-tl-lg">Product ID</th>
+                            <th scope="col" class="px-6 py-3">Name</th>
+                            <th scope="col" class="px-6 py-3">Code</th>
+                            <th scope="col" class="px-6 py-3">Model No</th>
+                            <th scope="col" class="px-6 py-3">Supplier</th>
+                            <th scope="col" class="px-6 py-3">Purchase Price</th>
+                            <th scope="col" class="px-6 py-3">Selling Price</th>
+                            <th scope="col" class="px-6 py-3">Warranty</th>
+                            <th scope="col" class="px-6 py-3">Free Issue</th>
+                            <th scope="col" class="px-6 py-3 rounded-tr-lg">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample Row 1 -->
+                        <tr class="bg-white border-2 text-black">
+                            <td class="px-6 py-4">P-1001</td>
+                            <td class="px-6 py-4 font-medium">Laptop Pro X1</td>
+                            <td class="px-6 py-4">LP-X1-2024</td>
+                            <td class="px-6 py-4">X1C9</td>
+                            <td class="px-6 py-4">TechSuppliers Inc.</td>
+                            <td class="px-6 py-4">$899.00</td>
+                            <td class="px-6 py-4">$1,299.00</td>
+                            <td class="px-6 py-4">24 months</td>
+                            <td class="px-6 py-4"><span class="p-2 rounded-lg bg-red-100 text-red-800">No</span></td>
+                            <td class="px-6 py-4 flex gap-2">
+                                <button class="p-2 border rounded-lg hover:bg-gray-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                    </svg>
+                                </button>
+                                <button class="p-2 border rounded-lg hover:bg-gray-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- Sample Row 2 -->
+                        <tr class="bg-white border-2 text-black">
+                            <td class="px-6 py-4">P-1002</td>
+                            <td class="px-6 py-4 font-medium">Wireless Mouse</td>
+                            <td class="px-6 py-4">WM-200</td>
+                            <td class="px-6 py-4">WM2.4G</td>
+                            <td class="px-6 py-4">PeriPharma Co.</td>
+                            <td class="px-6 py-4">$12.50</td>
+                            <td class="px-6 py-4">$24.99</td>
+                            <td class="px-6 py-4">365 days</td>
+                            <td class="px-6 py-4"><span class="p-2 rounded-lg bg-green-100 text-green-800">Yes</span></td>
+                            <td class="px-6 py-4 flex gap-2">
+                                <button class="p-2 border rounded-lg hover:bg-gray-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                    </svg>
+                                </button>
+                                <button class="p-2 border rounded-lg hover:bg-gray-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--footer-->
+    <footer class="h-[80px] bg-basic max-md:text-sm max-sm:text-xs max-md:flex-col text-center w-full flex items-center text-white justify-center gap-3">
+        <p>Copyright</p>
+        <p>Powered By <strong>Silicon Radon Networks (PVT) Ltd.</strong> All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <script src="../../scripts/common.js"></script>
+</body>
+
+</html>

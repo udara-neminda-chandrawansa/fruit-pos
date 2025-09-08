@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Information Form</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9fafb;
+        }
+        .form-card {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .form-card:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        .input-field {
+            transition: all 0.2s ease;
+        }
+        .input-field:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+        }
+        .submit-btn {
+            transition: all 0.3s ease;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        .product-card {
+            background-color: #f3f4f6;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-r from-blue-50 to-indigo-50 min-h-screen flex items-center justify-center p-4">
+    <div class="form-card bg-white max-w-4xl w-full p-0">
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 p-6 text-white">
+            <h1 class="text-2xl md:text-3xl font-bold text-center">Customer Information</h1>
+            <p class="text-center text-indigo-100 mt-2">Complete your purchase details below</p>
+        </div>
+        
+        <div class="p-6 md:p-8">
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Form Section -->
+                <form id="customerForm" class="space-y-5 w-full md:w-1/2">
+                    <h2 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                        <i class="fas fa-user-circle mr-2 text-indigo-500"></i>
+                        Personal Details
+                    </h2>
+                    
+                    <!-- Full Name -->
+                    <div class="relative">
+                        <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-user text-gray-400"></i>
+                            </div>
+                            <input type="text" id="fullName" name="fullName" required
+                                class="input-field pl-10 block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="relative">
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-gray-400"></i>
+                            </div>
+                            <input type="email" id="email" name="email" required
+                                class="input-field pl-10 block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="relative">
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-phone text-gray-400"></i>
+                            </div>
+                            <input type="tel" id="phone" name="phone" required
+                                class="input-field pl-10 block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="relative">
+                        <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Address</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-home text-gray-400"></i>
+                            </div>
+                            <input type="text" id="address" name="address" required
+                                class="input-field pl-10 block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Hidden card fields for JS logic -->
+                    <input type="hidden" id="cardNumber" name="cardNumber" value="">
+                    <input type="hidden" id="expiryDate" name="expiryDate" value="">
+                    <input type="hidden" id="cvv" name="cvv" value="">
+
+                    <!-- Pay Button -->
+                    <div class="text-center mt-8">
+                        <button type="submit"
+                            class="submit-btn bg-gradient-to-r from-indigo-600 to-blue-500 text-white px-8 py-3 rounded-lg hover:from-indigo-700 hover:to-blue-600 focus:outline-none shadow-md flex items-center justify-center mx-auto">
+                            <i class="fas fa-credit-card mr-2"></i>
+                            Complete Purchase
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Product Information Section -->
+                <div class="w-full md:w-1/2 flex flex-col gap-5 mt-8 md:mt-0">
+                    <div class="product-card p-6">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                            <i class="fas fa-mobile-alt mr-2 text-indigo-500"></i>
+                            Product Information
+                        </h2>
+                        
+                        <div class="flex items-center justify-center mb-6 hidden">
+                            <div class="bg-white p-3 rounded-full shadow-md">
+                                <i class="fas fa-mobile-alt text-5xl text-indigo-500"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                <p class="text-sm font-medium text-gray-500">Device</p>
+                                <p class="text-sm font-semibold text-gray-700">Samsung S22</p>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                <p class="text-sm font-medium text-gray-500">IMEI No</p>
+                                <p class="text-sm font-semibold text-gray-700">12121221</p>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                <p class="text-sm font-medium text-gray-500">Color</p>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+                                    <p class="text-sm font-semibold text-gray-700">Red</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                <p class="text-sm font-medium text-gray-500">Storage</p>
+                                <p class="text-sm font-semibold text-gray-700">64GB</p>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                <p class="text-sm font-medium text-gray-500">RAM</p>
+                                <p class="text-sm font-semibold text-gray-700">8GB</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 bg-blue-50 p-4 rounded-lg">
+                            <div class="flex justify-between items-center">
+                                <p class="text-base font-medium text-gray-700">Total Price:</p>
+                                <p class="text-xl font-bold text-indigo-600">Rs. 125,000/=</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="text-center text-sm text-gray-500 mt-4">
+                        <p>Secure payment processing. All information is encrypted.</p>
+                        <div class="flex justify-center mt-2 space-x-2">
+                            <i class="fab fa-cc-visa text-xl text-gray-600"></i>
+                            <i class="fab fa-cc-mastercard text-xl text-gray-600"></i>
+                            <i class="fab fa-cc-amex text-xl text-gray-600"></i>
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('customerForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Collect form data
+            const customerData = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value,
+                cardNumber: document.getElementById('cardNumber').value,
+                expiryDate: document.getElementById('expiryDate').value,
+                cvv: document.getElementById('cvv').value
+            };
+
+            // Save data to local storage
+            localStorage.setItem('customerData', JSON.stringify(customerData));
+
+            // Redirect to invoice page
+            window.location.href = '../invoice/';
+        });
+    </script>
+</body>
+
+</html>

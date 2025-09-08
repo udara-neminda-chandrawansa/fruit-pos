@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Reports - Application</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+    <div class="max-w-7xl mx-auto">
+        <!-- Page Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Sales Reports</h1>
+            <p class="text-gray-600">Application - Smartphone Sales Insights</p>
+        </div>
+
+        <!-- Key Metrics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Total Revenue Card -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold text-gray-800">Total Revenue</h2>
+                <p class="text-3xl font-bold text-blue-600">Rs. 12,345,678</p>
+                <p class="text-gray-500">Last 30 Days</p>
+            </div>
+
+            <!-- Total Units Sold Card -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold text-gray-800">Units Sold</h2>
+                <p class="text-3xl font-bold text-green-600">2,345</p>
+                <p class="text-gray-500">Last 30 Days</p>
+            </div>
+
+            <!-- Average Order Value Card -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold text-gray-800">Avg. Order Value</h2>
+                <p class="text-3xl font-bold text-purple-600">Rs. 5,263</p>
+                <p class="text-gray-500">Last 30 Days</p>
+            </div>
+        </div>
+
+        <!-- Sales Trends Chart -->
+        <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Sales Trends</h2>
+            <div class="w-full">
+                <canvas id="salesChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Top Selling Products Table -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Top Selling Products</h2>
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
+                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Units Sold</th>
+                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Revenue</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <tr>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Samsung S23 Ultra</td>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">1,200</td>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">Rs. 150,000,000</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">iPhone 14 Pro</td>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">950</td>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">Rs. 142,500,000</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Google Pixel 7</td>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">700</td>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">Rs. 84,000,000</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">OnePlus 11</td>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">500</td>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">Rs. 60,000,000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-8 text-sm text-gray-500">
+            <p>2025 © All Rights Reserved | Application | Powered by Silicon Radon Networks (Pvt) Ltd</p>
+        </div>
+    </div>
+
+    <script>
+        // Sales Chart Data
+        const salesData = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+            datasets: [{
+                label: 'Sales (in Rs.)',
+                data: [5000000, 7000000, 9000000, 12000000, 11000000, 13000000, 15000000],
+                backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                borderColor: 'rgba(59, 130, 246, 1)',
+                borderWidth: 2,
+                tension: 0.4,
+            }]
+        };
+
+        // Chart Configuration
+        const config = {
+            type: 'line',
+            data: salesData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                    },
+                    tooltip: {
+                        enabled: true,
+                    },
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Sales (in Rs.)',
+                        },
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Month',
+                        },
+                    },
+                },
+            },
+        };
+
+        // Render the Chart
+        const salesChart = new Chart(document.getElementById('salesChart'), config);
+    </script>
+</body>
+</html>

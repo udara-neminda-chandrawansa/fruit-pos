@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Basket Assembly</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../styles/common.css">
+</head>
+
+<body class="h-dvh flex flex-col">
+    <!--Nav-->
+    <div
+        class="nav bg-basic w-full h-[17dvh] py-6 rounded-b-full flex justify-between items-center max-lg:justify-center max-lg:flex-col">
+        <span class="flex items-center gap-3 ml-20 max-lg:ml-0 max-sm:scale-75">
+            <button onclick="history.go ( -1);"
+                class="rounded-full w-[50px] aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
+                <img src="../../images/common/go-back.png" alt="go-back" class="scale-75">
+            </button>
+            <button onclick="window.location.href = '../../main-panel/';"
+                class="p-2 text-basic rounded-lg bg-white flex gap-3 justify-center items-center hover:scale-90 transition-all">
+                <img src="../../images/common/go-to-main.png" alt="go-to-main">
+                Go to Main Panel
+            </button>
+        </span>
+        <span class="flex items-center gap-3 mr-20 max-lg:mr-0 max-sm:scale-75">
+            <!--Logged User-->
+            <h3 class="text-2xl max-md:text-sm text-white">Create a Fruit Basket</h3>
+            <!--log out btn-->
+            <button onclick="window.location.href = '../../';"
+                class="rounded-full w-[50px] aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
+                <img src="../../images/common/logout.svg" alt="logout" class="scale-[70%]">
+            </button>
+        </span>
+    </div>
+    <div class="flex-grow flex flex-col">
+        <!--breadcrumbs-->
+        <div class="px-12 max-sm:px-6 pt-5">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li class="inline-flex items-center">
+                        <p class="inline-flex items-center text-sm font-medium text-gray-700">
+                            <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                            </svg>
+                            Main Panel
+                        </p>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 9 4-4-4-4" />
+                            </svg>
+                            <p class="ms-1 text-sm font-medium text-gray-700 md:ms-2">Create Fruit</p>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <!--main-->
+        <div class="p-6">
+        <div class="bg-white rounded-lg border-2 p-6">
+            <!-- Top Section - Basket Details -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-gray-700">Product Name</label>
+                    <input type="text" id="productName" placeholder="Enter basket name..."
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-colors">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-gray-700">Price (LKR)</label>
+                    <input type="number" id="price" placeholder="0.00"
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-colors">
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <label class="text-sm font-medium text-gray-700 block mb-2">Description</label>
+                <textarea id="description" rows="4" placeholder="Describe your fruit basket..."
+                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-colors resize-none"></textarea>
+            </div>
+
+            <!-- Fruit Selection Section -->
+            <div class="bg-gray-50 rounded-xl p-6">
+                <div class="flex flex-col md:flex-row gap-4 items-center mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800">Select Fruits for Basket</h3>
+                    <div class="relative flex-1 max-w-md">
+                        <input type="text" id="searchFruits" placeholder="Search fruits..."
+                            class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:border-primary focus:outline-none transition-colors">
+                        <svg class="absolute left-3 top-2.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Fruit Grid -->
+                <div id="fruitGrid" class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+                    <!-- Fruits will be populated by JavaScript -->
+                </div>
+
+                <!-- Selected Fruits Summary -->
+                <div class="bg-white rounded-lg p-4 mb-6">
+                    <h4 class="font-medium text-gray-800 mb-3">Selected Fruits (<span id="selectedCount">0</span>)</h4>
+                    <div id="selectedFruits" class="space-y-2 max-h-32 overflow-y-auto">
+                        <p class="text-gray-500 text-sm" id="noSelection">No fruits selected yet</p>
+                    </div>
+                    <div class="mt-3 pt-3 border-t">
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium">Total Fruit Cost:</span>
+                            <span class="text-lg font-bold" style="color: var(--primary-color)">LKR <span
+                                    id="totalCost">0.00</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Button -->
+                <button id="addBasket"
+                    class="w-full py-4 text-white font-semibold rounded-lg transition-all duration-200 hover:transform hover:scale-[1.02] hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    style="background-color: var(--primary-color)">
+                    Add Fruit Basket
+                </button>
+            </div>
+        </div>
+        </div>
+        <div class="flex-grow"></div>
+        <footer
+            class="h-[80px] bg-basic max-md:text-sm max-sm:text-xs max-md:flex-col text-center w-full flex items-center text-white justify-center gap-3">
+            <p>2025 © All Rights Reserved | Application | Powered by Silicon Radon Networks (Pvt) Ltd</p>
+        </footer>
+    </div>
+
+
+    <script src="../../scripts/common.js"></script>
+    <script>
+        // Sample fruit data
+        const fruits = [
+            { id: 1, name: 'Apple', price: 150, image: '🍎' },
+            { id: 2, name: 'Banana', price: 80, image: '🍌' },
+            { id: 3, name: 'Orange', price: 120, image: '🍊' },
+            { id: 4, name: 'Grapes', price: 300, image: '🍇' },
+            { id: 5, name: 'Pineapple', price: 200, image: '🍍' },
+            { id: 6, name: 'Mango', price: 250, image: '🥭' },
+            { id: 7, name: 'Strawberry', price: 400, image: '🍓' },
+            { id: 8, name: 'Watermelon', price: 180, image: '🍉' },
+            { id: 9, name: 'Kiwi', price: 350, image: '🥝' }
+        ];
+
+        let selectedFruits = [];
+        let filteredFruits = [...fruits];
+
+        // DOM Elements
+        const fruitGrid = document.getElementById('fruitGrid');
+        const searchInput = document.getElementById('searchFruits');
+        const selectedCount = document.getElementById('selectedCount');
+        const selectedFruitsDiv = document.getElementById('selectedFruits');
+        const noSelection = document.getElementById('noSelection');
+        const totalCost = document.getElementById('totalCost');
+        const addButton = document.getElementById('addBasket');
+
+        // Initialize
+        function init() {
+            renderFruits();
+            setupEventListeners();
+        }
+
+        // Render fruit grid
+        function renderFruits() {
+            fruitGrid.innerHTML = '';
+            filteredFruits.forEach(fruit => {
+                const isSelected = selectedFruits.some(sf => sf.id === fruit.id);
+                const fruitCard = document.createElement('div');
+                fruitCard.className = `
+                relative bg-white rounded-xl p-4 border-2 cursor-pointer transition-all duration-200 hover:shadow-md
+                ${isSelected ? 'border-primary shadow-lg transform scale-105' : 'border-gray-200 hover:border-gray-300'}
+            `;
+
+                fruitCard.innerHTML = `
+                <div class="text-center">
+                    <div class="text-4xl mb-2">${fruit.image}</div>
+                    <h5 class="font-medium text-gray-800 mb-1">${fruit.name}</h5>
+                    <p class="text-sm text-gray-600">LKR ${fruit.price}</p>
+                    ${isSelected ? '<div class="absolute top-2 right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center"><svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>' : ''}
+                </div>
+            `;
+
+                fruitCard.addEventListener('click', () => toggleFruit(fruit));
+                fruitGrid.appendChild(fruitCard);
+            });
+        }
+
+        // Toggle fruit selection
+        function toggleFruit(fruit) {
+            const existingIndex = selectedFruits.findIndex(sf => sf.id === fruit.id);
+
+            if (existingIndex !== -1) {
+                selectedFruits.splice(existingIndex, 1);
+            } else {
+                selectedFruits.push({ ...fruit, quantity: 1 });
+            }
+
+            updateSelectedFruits();
+            renderFruits();
+        }
+
+        // Update selected fruits display
+        function updateSelectedFruits() {
+            selectedCount.textContent = selectedFruits.length;
+
+            if (selectedFruits.length === 0) {
+                noSelection.style.display = 'block';
+                selectedFruitsDiv.innerHTML = '<p class="text-gray-500 text-sm" id="noSelection">No fruits selected yet</p>';
+            } else {
+                selectedFruitsDiv.innerHTML = '';
+                selectedFruits.forEach(fruit => {
+                    const fruitItem = document.createElement('div');
+                    fruitItem.className = 'flex items-center justify-between bg-gray-50 rounded-lg p-3';
+                    fruitItem.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl">${fruit.image}</span>
+                        <div>
+                            <p class="font-medium text-gray-800">${fruit.name}</p>
+                            <p class="text-sm text-gray-600">LKR ${fruit.price} each</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="updateQuantity(${fruit.id}, -1)" class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors">-</button>
+                        <span class="w-8 text-center font-medium">${fruit.quantity}</span>
+                        <button onclick="updateQuantity(${fruit.id}, 1)" class="w-8 h-8 rounded-full hover:bg-gray-300 flex items-center justify-center transition-colors" style="background-color: var(--primary-color); color: white;">+</button>
+                    </div>
+                `;
+                    selectedFruitsDiv.appendChild(fruitItem);
+                });
+            }
+
+            // Update total cost
+            const total = selectedFruits.reduce((sum, fruit) => sum + (fruit.price * fruit.quantity), 0);
+            totalCost.textContent = total.toFixed(2);
+        }
+
+        // Update fruit quantity
+        function updateQuantity(fruitId, change) {
+            const fruit = selectedFruits.find(sf => sf.id === fruitId);
+            if (fruit) {
+                fruit.quantity = Math.max(1, fruit.quantity + change);
+                updateSelectedFruits();
+            }
+        }
+
+        // Search fruits
+        function searchFruits() {
+            const query = searchInput.value.toLowerCase();
+            filteredFruits = fruits.filter(fruit =>
+                fruit.name.toLowerCase().includes(query)
+            );
+            renderFruits();
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            searchInput.addEventListener('input', searchFruits);
+
+            addButton.addEventListener('click', () => {
+                const productName = document.getElementById('productName').value;
+                const price = document.getElementById('price').value;
+                const description = document.getElementById('description').value;
+
+                if (!productName || !price || selectedFruits.length === 0) {
+                    alert('Please fill in all fields and select at least one fruit!');
+                    return;
+                }
+
+                const basket = {
+                    name: productName,
+                    price: parseFloat(price),
+                    description,
+                    fruits: selectedFruits,
+                    totalFruitCost: selectedFruits.reduce((sum, fruit) => sum + (fruit.price * fruit.quantity), 0)
+                };
+
+                console.log('Fruit Basket Created:', basket);
+                alert(`Fruit basket "${productName}" added successfully! 🎉`);
+
+                // Reset form
+                document.getElementById('productName').value = '';
+                document.getElementById('price').value = '';
+                document.getElementById('description').value = '';
+                selectedFruits = [];
+                updateSelectedFruits();
+                renderFruits();
+            });
+        }
+
+        // Make updateQuantity globally accessible
+        window.updateQuantity = updateQuantity;
+
+        // Initialize the app
+        init();
+    </script>
+
+</body>
+
+</html>

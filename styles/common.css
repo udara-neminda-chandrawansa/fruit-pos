@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0%;
+  padding: 0%;
+  font-family: "Poppins", serif;
+}
+
+:root{
+  --primary-color: #ea5f54;
+  --primary-color-offset-1: #ea5f5436;
+  --primary-color-offset-2: #ea5f542B;
+  --primary-color-offset-3: #ea5f540F;
+  --primary-color-offset-4: #ea5f5414;
+}
+
+.bg-basic{
+  background-color: var(--primary-color);
+}
+
+.bg-basic-offset-1{
+  background-color: var(--primary-color-offset-1);
+}
+
+.bg-basic-offset-2{
+  background-color: var(--primary-color-offset-2);
+}
+
+.bg-basic-offset-3{
+  background-color: var(--primary-color-offset-3);
+}
+
+.bg-basic-offset-4{
+  background-color: var(--primary-color-offset-4);
+}
+
+.text-basic{
+  color: var(--primary-color);
+}
+
+.border-basic{
+  border-color: var(--primary-color);
+}
+
+/*
+*** For searcheable combo boxes
+*/
+
+.custom-select {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select-trigger {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  background: rgb(249 250 251);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #718096;
+}
+
+.custom-select-trigger::after {
+  width: 100px;
+  height: 100px;
+  background-color: black;
+}
+
+.custom-select-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  background: white;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.custom-select-search {
+  width: 100%;
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+  outline: none;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
+}
+
+.custom-select-option {
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
+}
+
+.custom-select-option:hover {
+  background-color: #f0f0f0;
+}
+
+.custom-select-option.selected {
+  background-color: #e0e0e0;
+}
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #f0f9fd;
+  border: 1px solid var(--primary-color);
+  color: #000;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext, .tooltip:focus .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--primary-color) transparent transparent transparent;
+}

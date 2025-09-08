@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application | Sales Returns Management</title>
+    <link rel="icon" href="../../images/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles/common.css">
+</head>
+
+<body class="min-h-dvh flex flex-col max-lg:h-fit">
+    <!--Nav-->
+    <div class="nav bg-basic w-full h-[17dvh] max-sm:py-6 rounded-b-full flex justify-between items-center max-lg:justify-center max-lg:flex-col">
+        <span class="flex items-center gap-3 ml-20 max-lg:ml-0 max-sm:scale-75">
+            <button onclick="history.go(-1);" class="rounded-full w-[50px] aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
+                <img src="../../images/common/back.svg" alt="go-back" class="scale-75">
+            </button>
+        </span>
+        <span class="flex items-center gap-3 mr-20 max-lg:mr-0 max-sm:scale-75">
+            <h3 class="text-2xl max-md:text-sm text-white">Welcome Sahan Ranawaka</h3>
+            <button onclick="window.location.href = '../../../';" class="rounded-full w-[50px] aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
+                <img src="../../images/common/logout.svg" alt="logout" class="scale-[70%]">
+            </button>
+        </span>
+    </div>
+
+    <!--content-->
+    <div class="flex flex-col flex-grow">
+        <!--breadcrumbs-->
+        <div class="px-12 max-sm:px-6 py-5">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li class="inline-flex items-center">
+                        <p class="inline-flex items-center text-sm font-medium text-gray-700">
+                            <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                            </svg>
+                            Main Panel
+                        </p>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                            </svg>
+                            <p class="ms-1 text-sm font-medium text-gray-700 md:ms-2">Sales Returns</p>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+
+        <!-- Return Form -->
+        <div class="px-12 max-sm:px-6 py-5">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-bold mb-4">Process Return</h2>
+                <form id="returnForm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Left Column -->
+                        <div>
+                            <!-- Product ID/Name -->
+                            <div class="mb-4">
+                                <label for="productSearch" class="block text-sm font-medium text-gray-700 mb-1">Product ID/Name *</label>
+                                <input type="text" id="productSearch" autocomplete="on" required
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    placeholder="Search product...">
+                            </div>
+
+                            <!-- Quantity -->
+                            <div class="mb-4">
+                                <label for="quantity" class="block text-sm font-medium text-gray-700 mb-1">Quantity *</label>
+                                <input type="number" id="quantity" min="1" required
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            </div>
+
+                            <!-- Return Type -->
+                            <div class="mb-4">
+                                <label for="returnType" class="block text-sm font-medium text-gray-700 mb-1">Return Type *</label>
+                                <select id="returnType" required
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                    <option value="">Select Return Type</option>
+                                    <option value="warranty">Warranty</option>
+                                    <option value="exchange">Exchange</option>
+                                    <option value="refund">Refund</option>
+                                    <option value="revalue">Revalue</option>
+                                    <option value="cease">Cease</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div>
+                            <!-- Reason -->
+                            <div class="mb-4">
+                                <label for="returnReason" class="block text-sm font-medium text-gray-700 mb-1">Reason *</label>
+                                <select id="returnReason"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2">
+                                    <option value="">Select Predefined Reason</option>
+                                    <option value="damaged">Damaged Product</option>
+                                    <option value="wrong_item">Wrong Item Received</option>
+                                    <option value="no_longer_needed">No Longer Needed</option>
+                                </select>
+                                <span class="text-sm text-gray-500">or</span>
+                                <input type="text" id="customReason"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-2"
+                                    placeholder="Enter custom reason">
+                            </div>
+
+                            <!-- New Invoice ID (conditional) -->
+                            <div class="mb-4 hidden" id="invoiceField">
+                                <label for="newInvoiceId" class="block text-sm font-medium text-gray-700 mb-1">New Invoice ID *</label>
+                                <input type="text" id="newInvoiceId"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            </div>
+
+                            <!-- Restock Location -->
+                            <div class="mb-4">
+                                <label for="restockLocation" class="block text-sm font-medium text-gray-700 mb-1">Restock Location</label>
+                                <select id="restockLocation"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                    <option value="">Select Location</option>
+                                    <option value="warehouse_1">Main Warehouse</option>
+                                    <option value="warehouse_2">North Warehouse</option>
+                                    <option value="vehicle_1">Delivery Vehicle 1</option>
+                                    <option value="vehicle_2">Delivery Vehicle 2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Buttons -->
+                    <div class="flex justify-end gap-3 mt-6">
+                        <button type="button" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100">Cancel</button>
+                        <button type="submit" class="px-6 py-2 bg-basic text-white rounded-lg hover:bg-opacity-90">Process Return</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Returns Table -->
+        <div class="px-12 max-sm:px-6 py-5 overflow-y-auto bg-white flex flex-col">
+            <div class="relative overflow-x-auto">
+                <table id="returnsTable" class="w-full text-sm text-left rtl:text-right text-gray-500">
+                    <thead class="text-xs text-white uppercase bg-basic">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 rounded-tl-lg">Return ID</th>
+                            <th scope="col" class="px-6 py-3">Product</th>
+                            <th scope="col" class="px-6 py-3">Quantity</th>
+                            <th scope="col" class="px-6 py-3">Type</th>
+                            <th scope="col" class="px-6 py-3">Reason</th>
+                            <th scope="col" class="px-6 py-3">New Invoice</th>
+                            <th scope="col" class="px-6 py-3">Location</th>
+                            <th scope="col" class="px-6 py-3">Date</th>
+                            <th scope="col" class="px-6 py-3 rounded-tr-lg">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample Row 1 -->
+                        <tr class="bg-white border-2 text-black">
+                            <td class="px-6 py-4">R-1001</td>
+                            <td class="px-6 py-4 font-medium">Laptop Pro X1</td>
+                            <td class="px-6 py-4">1</td>
+                            <td class="px-6 py-4"><span class="p-2 rounded-lg bg-blue-100 text-blue-800">Warranty</span></td>
+                            <td class="px-6 py-4">Damaged Product</td>
+                            <td class="px-6 py-4">-</td>
+                            <td class="px-6 py-4">Main Warehouse</td>
+                            <td class="px-6 py-4">2024-06-15</td>
+                            <td class="px-6 py-4"><span class="p-2 rounded-lg bg-green-100 text-green-800">Completed</span></td>
+                        </tr>
+                        <!-- Sample Row 2 -->
+                        <tr class="bg-white border-2 text-black">
+                            <td class="px-6 py-4">R-1002</td>
+                            <td class="px-6 py-4 font-medium">Wireless Mouse</td>
+                            <td class="px-6 py-4">2</td>
+                            <td class="px-6 py-4"><span class="p-2 rounded-lg bg-purple-100 text-purple-800">Exchange</span></td>
+                            <td class="px-6 py-4">Wrong Item Received</td>
+                            <td class="px-6 py-4">INV-2024-0567</td>
+                            <td class="px-6 py-4">North Warehouse</td>
+                            <td class="px-6 py-4">2024-06-10</td>
+                            <td class="px-6 py-4"><span class="p-2 rounded-lg bg-yellow-100 text-yellow-800">Pending</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--footer-->
+    <footer class="h-[80px] bg-basic max-md:text-sm max-sm:text-xs max-md:flex-col text-center w-full flex items-center text-white justify-center gap-3">
+        <p>Copyright</p>
+        <p>Powered By <strong>Silicon Radon Networks (PVT) Ltd.</strong> All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <script src="../../scripts/common.js"></script>
+    <script>
+        // Show/hide new invoice field based on return type
+        document.getElementById('returnType').addEventListener('change', function() {
+            const invoiceField = document.getElementById('invoiceField');
+            if (this.value === 'exchange') {
+                invoiceField.classList.remove('hidden');
+            } else {
+                invoiceField.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+
+</html>

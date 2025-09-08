@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Application | Items</title>
+    <link rel="icon" href="../../images/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../styles/common.css" />
+</head>
+<script>
+    // Initialize an array to hold all rows' data
+    let allData = [];
+</script>
+
+<body class="h-dvh max-lg:h-fit" onload="allPriceCalc();">
+    <!--Nav-->
+    <div
+        class="nav bg-basic w-full h-[10%] max-lg:h-[17dvh] max-sm:py-6 rounded-b-full flex justify-between items-center max-lg:justify-center max-lg:flex-col">
+        <span class="flex items-center gap-3 ml-20 max-lg:ml-0 max-sm:scale-75">
+            <button onclick="history.go ( -1);"
+                class="rounded-full w-[50px] aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
+                <img src="./../../../images/common/back.svg" alt="go-back" class="scale-75">
+            </button>
+            <!--
+            <button onclick="window.location.href = '../../../main-panel/';"
+                class="p-2 text-basic rounded-lg bg-white flex gap-3 justify-center items-center hover:scale-90 transition-all">
+                <img src="../../../images/common/go-to-main.png" alt="go-to-main">
+                Go to Main Panel
+            </button>
+            -->
+        </span>
+        <span class="flex items-center gap-3 mr-20 max-lg:mr-0 max-sm:scale-75">
+            <!--Logged User-->
+            <h3 class="text-2xl max-md:text-sm text-white">Welcome Sahan Ranawaka</h3>
+            <!--log out btn-->
+            <button onclick="window.location.href = '../../../';"
+                class="rounded-full w-[50px] aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
+                <img src="../../../images/common/logout.svg" alt="logout" class="scale-[70%]">
+            </button>
+        </span>
+    </div>
+    <div class="h-[90%] flex flex-col">
+        <!--breadcrumbs-->
+        <div class="px-12 max-sm:px-6 py-5">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li class="inline-flex items-center">
+                        <p class="inline-flex items-center text-sm font-medium text-gray-700">
+                            <svg class="w-3 h-3.5 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                            </svg>
+                            Main Panel
+                        </p>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 9 4-4-4-4" />
+                            </svg>
+                            <p class="ms-1 text-sm font-medium text-gray-700 md:ms-2">
+                                Billing
+                            </p>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <!--main content-->
+        <div class="flex px-12 max-sm:px-6 pb-5 gap-2 overflow-y-auto max-xl:flex-col h-full">
+            <!--blue div + textfields + table-->
+            <div class="bg-white flex flex-col rounded-lg border-2 border-[#00000096] xl:w-2/3">
+                <div class="flex flex-col">
+                    <!--blue div-->
+                    <span
+                        class="bg-basic h-20 max-sm:h-fit rounded-t-md flex max-lg:flex-col max-lg:py-1 justify-between px-4 items-center">
+                        <span class="flex gap-3 text-white max-sm:text-sm max-sm:w-full">
+                            <p>Sales Invoice</p>
+                            <p>Branch: Colombo</p>
+                        </span>
+                        <!--
+                        <span class="max-sm:p-2 max-sm:text-sm gap-3 flex justify-end max-sm:flex-col max-sm:w-full">
+                            <button data-modal-target="default-modal" data-modal-toggle="default-modal"
+                                class="py-1 px-6 bg-white border-2 text-black rounded-lg">
+                                View Hold List
+                            </button>
+                            <button class="py-1 px-6 bg-white border-2 text-black rounded-lg">
+                                Retail
+                            </button>
+                            <button class="py-1 px-6 bg-white border-2 text-black rounded-lg">
+                                Wholesale
+                            </button>
+                        </span>
+                        -->
+                    </span>
+                    <!--textfields-->
+                    <div class="h-fit p-2 flex gap-3 max-sm:flex-col max-sm:items-center">
+                        <!--custom 
+                        <div class="custom-select sm:w-fit">
+                            <select id="customer" name="customer"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 hidden">
+                                <option value="">Walk-in customer</option>
+                                <option value="Customer 1">Customer 1</option>
+                                <option value="Customer 2">Customer 2</option>
+                                <option value="Customer 3">Customer 3</option>
+                                <option value="Customer 4">Customer 4</option>
+                            </select>
+                        </div>
+                        combobox-->
+                        <!--add customer btn (blue)-->
+                        <button type="button" data-modal-target="customer-modal" data-modal-toggle="customer-modal"
+                            class="text-white w-fit bg-basic hover:bg-basic/90 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                <path fill-rule="evenodd"
+                                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                            </svg>
+                        </button>
+                        <!--barcode-->
+                        <div class="max-sm:w-full">
+                            <input type="text" id="barcode"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                placeholder="Barcode (Shift + S)" required />
+                        </div>
+                    </div>
+                </div>
+                <!--table from flowbite-->
+                <div class="relative overflow-x-auto overflow-y-auto max-h-screen h-full">
+                    <table id="itemsTable" class="w-full text-sm text-left rtl:text-right text-gray-500">
+                        <thead class="text-xs text-black uppercase bg-[#00000042]">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 rounded-tl-lg">Item Name</th>
+                                <th scope="col" class="px-6 py-3">Qty</th>
+                                <th scope="col" class="px-6 py-3">Price</th>
+                                <th scope="col" class="px-6 py-3">Serial Number</th>
+                                <th scope="col" class="px-6 py-3">Subtotal</th>
+                                <th scope="col" class="px-6 py-3 rounded-tr-lg"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-2 text-black">
+                                <td scope="row"
+                                    class="px-6 py-4 font-medium whitespace-nowrap max-2xl:max-w-[100px] truncate cursor-pointer"
+                                    title="Samsung S22">
+                                    Samsung S22
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="relative flex items-center w-full">
+                                        <button type="button" onclick="decrementQuantity('quantity-input-1')"
+                                            class="flex-shrink-0 text-gray-900 border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[2.5rem] text-center">
+                                            <svg class="w-2.5 h-2.5 text-gray-900" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                            </svg>
+                                        </button>
+                                        <input type="number" id="quantity-input-1"
+                                            class="flex-shrink-0 text-gray-900 border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[4rem] text-center"
+                                            placeholder="QTY" value="1" min="1"
+                                            onchange="priceCalc('quantity-input-1', 'item-1-price', 'item-1-single-price', 'item-1-discount', 'item-1-subtotal');" />
+                                        <button type="button" onclick="incrementQuantity('quantity-input-1')"
+                                            class="flex-shrink-0 text-gray-900 border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[2.5rem] text-center">
+                                            <svg class="w-2.5 h-2.5 text-gray-900" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <input type="hidden" name="item-1-single-price" id="item-1-single-price"
+                                        value="125000">
+                                    <p id="item-1-price">0</p>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <p>00000001</p>
+                                </td>
+                                <td class="px-6 py-4" id="item-1-subtotal">0</td>
+                                <td class="px-6 py-4">
+                                    <button class="delete-item p-3 border-2 bg-red-600 text-white rounded-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--white control panel-->
+                <div class="bg-[#0000000F] h-[200px] max-xl:h-fit flex flex-col rounded-b-lg">
+                    <!--info-->
+                    <span
+                        class="flex gap-3 h-fit w-full justify-evenly py-3 border-[#00000096] border-t-2 border-b-2 max-md:text-sm max-sm:text-xs max-md:flex-col max-md:p-2">
+                        <p>Quantity: <span id="wc_qty"></span></p>
+                        <p>Total Amount: <span id="wc_t_amount"></span></p>
+                        <p>Grand Total: <span id="wc_g_total"></span></p>
+                    </span>
+                    <!--txts + btns-->
+                    <div class="flex items-center max-lg:flex-col">
+                        <!--txts-->
+                        <div class="flex flex-col gap-2 p-2 w-1/2 max-lg:w-full">
+                            <div class="flex justify-between items-center">
+                                <label for="discount"
+                                    class="lg:w-full text-end lg:pr-2 block text-sm font-medium text-gray-900 max-sm:text-xs">Discount</label>
+                                <input type="text" id="discount"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-fit p-2"
+                                    placeholder="0" required />
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <label for="tax"
+                                    class="lg:w-full text-end lg:pr-2 block text-sm font-medium text-gray-900 max-sm:text-xs">Tax</label>
+                                <input type="text" id="tax"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-fit p-2"
+                                    placeholder="0" required />
+                            </div>
+                        </div>
+                        <!--btns-->
+                        <div class="grid grid-rows-2 grid-cols-2 grid-flow-col p-2 gap-4 w-1/2 max-lg:w-full">
+                            <button type="button" data-modal-target="payment-modal" data-modal-toggle="payment-modal"
+                                onclick="getDataForPaymentModal();" id="payAllBtn"
+                                class="row-span-2 gap-2 flex justify-center items-center text-white bg-basic focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 max-sm:px-2 py-2 max-sm:py-1 text-center inline-flex items-center max-sm:text-xs">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-cash" viewBox="0 0 16 16">
+                                    <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+                                    <path
+                                        d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2z" />
+                                </svg>
+                                Pay All
+                            </button>
+                            <button type="button" id="holdAllBtn"
+                                class="col-span-2 gap-2 h-full flex justify-center items-center text-white bg-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 max-sm:px-2 py-2 max-sm:py-1 text-center inline-flex items-center max-sm:text-xs">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                <p id="holdBtnText">Hold All</p>
+                            </button>
+                            <button type="button"
+                                class="col-span-2 gap-2 h-full flex justify-center items-center text-white bg-red-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 max-sm:px-2 py-2 max-sm:py-1 text-center inline-flex items-center max-sm:text-xs">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-slash-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                    <path
+                                        d="M11.354 4.646a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708" />
+                                </svg>
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--sidebar-->
+            <div class="flex flex-col w-1/3 border-2 rounded-lg max-md:w-full max-xl:w-full">
+                <!--Search bar-->
+                <span class="h-1/6 p-3 bg-[#0000000F] border-b-2 2xl:h-[5%] min-h-[65px]">
+                    <input type="text" id="searchInput"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder="Search for items..." required />
+                </span>
+                <!--custom combobox
+                <div class="custom-select w-full">
+                    <select id="search" name="city"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 hidden">
+                        <option value="">Search Item</option>
+                        <option value="Item 1">Item 1</option>
+                        <option value="Item 2">Item 2</option>
+                        <option value="Item 3">Item 3</option>
+                        <option value="Item 4">Item 4</option>
+                    </select>
+                </div>
+                -->
+                <!--sidebar products cards-->
+                <div
+                    class="grid grid-cols-3 max-xl:grid-cols-5 max-lg:grid-cols-4 max-[600px]:grid-cols-3 max-[400px]:grid-cols-2 gap-3 overflow-y-auto p-3">
+                    <div class="bg-basic-offset-3 xl:h-[160px] max-xl:aspect-[4/5] flex flex-col justify-between rounded-md"
+                        data-tooltip-target="tooltip-top1" data-tooltip-placement="top">
+
+                        <span
+                            class="bg-basic h-1/6 rounded-t-md text-white flex justify-center items-center text-sm">
+                            <p class="truncate">EXT-0001</p>
+                        </span>
+                        <div class="flex flex-col justify-between h-5/6 p-1">
+                            <div id="tooltip-top1" role="tooltip"
+                                class="absolute z-10 invisible inline-block p-2 text-xs font-medium text-black bg-[#f0f9fd] border-[#029ED9] border-[1px] rounded-lg shadow-xs opacity-0 tooltip">
+                                Phone Charger
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                            <img class="object-contain h-1/2 w-full" src="../../../images/common/sample-prod.png"
+                                alt="sample_prod" />
+                            <span class="flex flex-col text-xs text-center h-fit">
+                                <p class="truncate">Phone Charger</p>
+                                <p class="truncate">2,000.00</p>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="bg-basic-offset-3 xl:h-[160px] max-xl:aspect-[4/5] flex flex-col justify-between rounded-md"
+                        data-tooltip-target="tooltip-top2" data-tooltip-placement="top">
+
+                        <span
+                            class="bg-basic h-1/6 rounded-t-md text-white flex justify-center items-center text-sm">
+                            <p class="truncate">EXT-0001</p>
+                        </span>
+                        <div class="flex flex-col justify-between h-5/6 p-1">
+                            <div id="tooltip-top2" role="tooltip"
+                                class="absolute z-10 invisible inline-block p-2 text-xs font-medium text-black bg-[#f0f9fd] border-[#029ED9] border-[1px] rounded-lg shadow-xs opacity-0 tooltip">
+                                Phone Charger
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                            <img class="object-contain h-1/2 w-full" src="../../../images/common/sample-prod.png"
+                                alt="sample_prod" />
+                            <span class="flex flex-col text-xs text-center h-fit">
+                                <p class="truncate">Phone Charger</p>
+                                <p class="truncate">2,000.00</p>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="bg-basic-offset-3 xl:h-[160px] max-xl:aspect-[4/5] flex flex-col justify-between rounded-md"
+                        data-tooltip-target="tooltip-top3" data-tooltip-placement="top">
+
+                        <span
+                            class="bg-basic h-1/6 rounded-t-md text-white flex justify-center items-center text-sm">
+                            <p class="truncate">EXT-0001</p>
+                        </span>
+                        <div class="flex flex-col justify-between h-5/6 p-1">
+                            <div id="tooltip-top3" role="tooltip"
+                                class="absolute z-10 invisible inline-block p-2 text-xs font-medium text-black bg-[#f0f9fd] border-[#029ED9] border-[1px] rounded-lg shadow-xs opacity-0 tooltip">
+                                Phone Charger
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                            <img class="object-contain h-1/2 w-full" src="../../../images/common/sample-prod.png"
+                                alt="sample_prod" />
+                            <span class="flex flex-col text-xs text-center h-fit">
+                                <p class="truncate">Phone Charger</p>
+                                <p class="truncate">2,000.00</p>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="bg-basic-offset-3 xl:h-[160px] max-xl:aspect-[4/5] flex flex-col justify-between rounded-md"
+                        data-tooltip-target="tooltip-top4" data-tooltip-placement="top">
+
+                        <span
+                            class="bg-basic h-1/6 rounded-t-md text-white flex justify-center items-center text-sm">
+                            <p class="truncate">EXT-0001</p>
+                        </span>
+                        <div class="flex flex-col justify-between h-5/6 p-1">
+                            <div id="tooltip-top4" role="tooltip"
+                                class="absolute z-10 invisible inline-block p-2 text-xs font-medium text-black bg-[#f0f9fd] border-[#029ED9] border-[1px] rounded-lg shadow-xs opacity-0 tooltip">
+                                Phone Charger
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                            <img class="object-contain h-1/2 w-full" src="../../../images/common/sample-prod.png"
+                                alt="sample_prod" />
+                            <span class="flex flex-col text-xs text-center h-fit">
+                                <p class="truncate">Phone Charger</p>
+                                <p class="truncate">2,000.00</p>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="bg-basic-offset-3 xl:h-[160px] max-xl:aspect-[4/5] flex flex-col justify-between rounded-md"
+                        data-tooltip-target="tooltip-top5" data-tooltip-placement="top">
+
+                        <span
+                            class="bg-basic h-1/6 rounded-t-md text-white flex justify-center items-center text-sm">
+                            <p class="truncate">EXT-0001</p>
+                        </span>
+                        <div class="flex flex-col justify-between h-5/6 p-1">
+                            <div id="tooltip-top5" role="tooltip"
+                                class="absolute z-10 invisible inline-block p-2 text-xs font-medium text-black bg-[#f0f9fd] border-[#029ED9] border-[1px] rounded-lg shadow-xs opacity-0 tooltip">
+                                Phone Charger
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                            <img class="object-contain h-1/2 w-full" src="../../../images/common/sample-prod.png"
+                                alt="sample_prod" />
+                            <span class="flex flex-col text-xs text-center h-fit">
+                                <p class="truncate">Phone Charger</p>
+                                <p class="truncate">2,000.00</p>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="bg-basic-offset-3 xl:h-[160px] max-xl:aspect-[4/5] flex flex-col justify-between rounded-md"
+                        data-tooltip-target="tooltip-top6" data-tooltip-placement="top">
+
+                        <span
+                            class="bg-basic h-1/6 rounded-t-md text-white flex justify-center items-center text-sm">
+                            <p class="truncate">EXT-0001</p>
+                        </span>
+                        <div class="flex flex-col justify-between h-5/6 p-1">
+                            <div id="tooltip-top6" role="tooltip"
+                                class="absolute z-10 invisible inline-block p-2 text-xs font-medium text-black bg-[#f0f9fd] border-[#029ED9] border-[1px] rounded-lg shadow-xs opacity-0 tooltip">
+                                Phone Charger
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                            <img class="object-contain h-1/2 w-full" src="../../../images/common/sample-prod.png"
+                                alt="sample_prod" />
+                            <span class="flex flex-col text-xs text-center h-fit">
+                                <p class="truncate">Phone Charger</p>
+                                <p class="truncate">2,000.00</p>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- View Hold List Modal -->
+    <div id="default-modal" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                    <h3 class="text-xl font-semibold text-gray-900">
+                        Hold List
+                    </h3>
+                    <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                        data-modal-hide="default-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-4 md:p-5 space-y-4">
+                    <div class="relative overflow-x-auto">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">
+                                        ID
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Date
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Ref ID
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b">
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                        01
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        2025/11/11
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        0001
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        Buy
+                                    </td>
+                                </tr>
+                                <tr class="bg-white border-b">
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                        01
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        2025/11/11
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        0001
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        Buy
+                                    </td>
+                                </tr>
+                                <tr class="bg-white border-b">
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                        01
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        2025/11/11
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        0001
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        Buy
+                                    </td>
+                                </tr>
+                                <tr class="bg-white border-b">
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                        01
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        2025/11/11
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        0001
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        Buy
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add customer Modal -->
+    <div id="customer-modal" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                    <h3 class="text-xl font-semibold text-gray-900">
+                        Add Customer
+                    </h3>
+                    <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                        data-modal-hide="customer-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-4 md:p-5 space-y-4">
+                    <div class="grid grid-cols-3 max-md:grid-cols-1 gap-6">
+                        <div class="max-sm:w-full">
+                            <label for="customer_name" class="block mb-2 text-sm font-medium text-black ">Customer
+                                Name</label>
+                            <input type="text" id="customer_name"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                placeholder="Enter Customer name" required />
+                        </div>
+                        <div class="max-sm:w-full">
+                            <label for="mobile" class="block mb-2 text-sm font-medium text-black ">Mobile</label>
+                            <input type="text" id="mobile"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                placeholder="Enter mobile" required />
+                        </div>
+                        <div class="max-sm:w-full">
+                            <label for="phone" class="block mb-2 text-sm font-medium text-black ">Phone</label>
+                            <input type="text" id="phone"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                placeholder="Enter phone" required />
+                        </div>
+                        <div class="max-sm:w-full">
+                            <label for="email" class="block mb-2 text-sm font-medium text-black ">Email</label>
+                            <input type="email" id="email"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                placeholder="Enter email" required />
+                        </div>
+                        <div class="max-sm:w-full">
+                            <label for="prev_due" class="block mb-2 text-sm font-medium text-black ">Previous
+                                Due</label>
+                            <input type="text" id="prev_due"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                placeholder="Enter previous due" required />
+                        </div>
+                        <div class="max-sm:w-full">
+                            <label for="gst" class="block mb-2 text-sm font-medium text-black ">GST Number</label>
+                            <input type="text" id="gst"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                placeholder="Enter GST number" required />
+                        </div>
+                        <div class="max-sm:w-full">
+                            <label for="tax_no" class="block mb-2 text-sm font-medium text-black ">Tax Number</label>
+                            <input type="text" id="tax_no"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                placeholder="Enter tax number" required />
+                        </div>
+                        <div class="max-sm:w-full">
+                            <label for="province" class="block mb-2 text-sm font-medium text-black ">Province</label>
+                            <select id="province"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <option selected>Choose a province</option>
+                                <option value="west">Western Province</option>
+                                <option value="east">Eastern Province</option>
+                                <option value="south">Southern Province</option>
+                                <option value="north">Northern Province</option>
+                            </select>
+                        </div>
+                        <div class="max-sm:w-full">
+                            <label for="district" class="block mb-2 text-sm font-medium text-black ">District</label>
+                            <select id="district"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <option selected>Choose a district</option>
+                                <option value="gm">Gampaha</option>
+                                <option value="col">Colombo</option>
+                                <option value="kan">Kandy</option>
+                                <option value="kur">Kurunegala</option>
+                            </select>
+                        </div>
+                        <div class="max-sm:w-full">
+                            <label for="city" class="block mb-2 text-sm font-medium text-black ">City</label>
+                            <!--custom combobox-->
+                            <div class="custom-select w-full">
+                                <select id="city" name="city"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 hidden">
+                                    <option value="">Select city</option>
+                                    <option value="City 1">City 1</option>
+                                    <option value="City 2">City 2</option>
+                                    <option value="City 3">City 3</option>
+                                    <option value="City 4">City 4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="max-sm:w-full">
+                            <label for="p_code" class="block mb-2 text-sm font-medium text-black">Postal
+                                Code</label>
+                            <!--custom combobox-->
+                            <div class="custom-select w-full">
+                                <select id="p_code" name="p_code"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 hidden">
+                                    <option value="">Select postal code</option>
+                                    <option value="1001">1001</option>
+                                    <option value="1002">1002</option>
+                                    <option value="1003">1003</option>
+                                    <option value="1004">1004</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="max-sm:w-full">
+                            <label for="address" class="block mb-2 text-sm font-medium text-black">Address</label>
+                            <textarea id="address" rows="2"
+                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                                placeholder="Enter address"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b">
+                    <button data-modal-hide="customer-modal" type="button"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save</button>
+                    <button data-modal-hide="customer-modal" type="button"
+                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Payment Modal -->
+    <div id="payment-modal" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                    <h3 class="text-xl font-semibold text-gray-900">
+                        Make Payment
+                    </h3>
+                    <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                        data-modal-hide="payment-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-4 md:p-5 space-y-4">
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!--text fields-->
+                        <div class="grid md:grid-cols-1 gap-6">
+                            <div class="max-sm:w-full">
+                                <label for="r_amount" class="block mb-2 text-sm font-medium text-black ">Recieved
+                                    Amount</label>
+                                <input type="number" id="r_amount" data-input-counter data-input-counter-min="1"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    placeholder="Enter recieved amount" required />
+                            </div>
+                            <div class="max-sm:w-full">
+                                <label for="p_amount" class="block mb-2 text-sm font-medium text-black ">Paying
+                                    Amount</label>
+                                <input type="number" id="p_amount" data-input-counter data-input-counter-min="1"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    placeholder="Enter paying amount" required />
+                            </div>
+                            <div class="max-sm:w-full">
+                                <label for="c_return" class="block mb-2 text-sm font-medium text-black ">Change
+                                    Return</label>
+                                <input type="number" id="c_return" data-input-counter data-input-counter-min="1"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    placeholder="Enter change return" required />
+                            </div>
+                            <div class="max-sm:w-full">
+                                <label for="p_type" class="block mb-2 text-sm font-medium text-black ">Payment
+                                    Type</label>
+                                <select id="p_type"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                    <option selected>Choose a payment type</option>
+                                    <option value="cash">Cash</option>
+                                    <option value="visa">Visa</option>
+                                    <option value="master">Master Card</option>
+                                    <option value="koko">Koko</option>
+                                </select>
+                            </div>
+                            <div class="max-sm:w-full">
+                                <label for="notes" class="block mb-2 text-sm font-medium text-black">Notes</label>
+                                <textarea id="notes" rows="2"
+                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="Enter notes"></textarea>
+                            </div>
+                            <div class="max-sm:w-full">
+                                <label for="p_status" class="block mb-2 text-sm font-medium text-black ">Payment
+                                    Status</label>
+                                <select id="p_status"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                    <option selected>Choose a payment status</option>
+                                    <option value="paid">Paid</option>
+                                    <option value="unpayed">Unpaid</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--table-->
+                        <div class="grid md:col-span-2 gap-6">
+                            <div class="relative overflow-x-auto md:border-l md:pl-6">
+                                <table class="w-full text-sm text-left text-gray-500">
+                                    <tbody>
+                                        <tr class="bg-white max-md:border-t">
+                                            <th scope="row" class=" py-3 text-xs text-gray-700 uppercase">
+                                                Total Products
+                                            </th>
+                                            <td class=" py-4" colspan="2">
+                                                <p id="t_products"></p>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white">
+                                            <th scope="row" class=" py-3 text-xs text-gray-700 uppercase">
+                                                Total Amount
+                                            </th>
+                                            <td class=" py-4">
+                                                <p id="t_amount"></p>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white">
+                                            <th scope="row" class=" py-3 text-xs text-gray-700 uppercase">
+                                                Discount
+                                            </th>
+                                            <td class=" py-4">
+                                                <p id="dis"></p>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white">
+                                            <th scope="row" class=" py-3 text-xs text-gray-700 uppercase">
+                                                Tax
+                                            </th>
+                                            <td class=" py-4">
+                                                <p id="_tax"></p>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white">
+                                            <th scope="row" class=" py-3 text-xs text-gray-700 uppercase">
+                                                Tax Type
+                                            </th>
+                                            <td class=" py-4">
+                                                <p id="t_type"></p>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white border-b">
+                                            <th scope="row" class=" py-3 text-xs text-gray-700 uppercase">
+                                                Grand Total
+                                            </th>
+                                            <td class=" py-4">
+                                                <p id="g_total"></p>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white">
+                                            <th scope="row" class=" py-3 text-xs text-gray-700 uppercase">
+                                                Commission
+                                            </th>
+                                            <td class=" py-4">
+                                                <input type="number" id="commission" data-input-counter
+                                                    data-input-counter-min="1"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    placeholder="Enter commission" required />
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white">
+                                            <th scope="row" class=" py-3 text-xs text-gray-700 uppercase">
+                                                Warrenty Period
+                                            </th>
+                                            <td class=" py-4">
+                                                <select name="warrenty_period" id="warrenty_period"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                                    <option value="1y">1 Year</option>
+                                                    <option value="2y">2 Year</option>
+                                                    <option value="3y">3 Year</option>
+                                                    <option value="1m">1 Month</option>
+                                                    <option value="3m">3 Month</option>
+                                                    <option value="6m">4 Month</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white">
+                                            <th scope="row" class=" py-3 text-xs text-gray-700 uppercase">
+                                                Warrenty Card Number
+                                            </th>
+                                            <td class=" py-4">
+                                                <input type="number" id="warrenty_cnum" data-input-counter
+                                                    data-input-counter-min="1"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    placeholder="Enter warrenty card number" required />
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white">
+                                            <th scope="row" class=" py-3 text-xs text-gray-700 uppercase">
+                                                With Guide
+                                            </th>
+                                            <td class=" py-4">
+                                                <input id="w_guide" type="checkbox" value=""
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-white">
+                                            <th scope="row" class=" py-3 text-xs text-gray-700 uppercase">
+                                                Send SMS
+                                            </th>
+                                            <td class=" py-4">
+                                                <input id="sms" type="checkbox" value=""
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b">
+                    <button data-modal-hide="payment-modal" type="button"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" onclick="window.location.href='../../mobile/billing/invoice/'">Send</button>
+                    <button data-modal-hide="payment-modal" type="button"
+                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+<script src="../../../scripts/common.js"></script>
+<script>
+    // for incrementing, decrementing qty
+    function incrementQuantity(inputId) {
+        const input = document.getElementById(inputId);
+        input.value = parseInt(input.value) + 1;
+        input.dispatchEvent(new Event('change'));
+    }
+
+    function decrementQuantity(inputId) {
+        const input = document.getElementById(inputId);
+        if (parseInt(input.value) > 1) {
+            input.value = parseInt(input.value) - 1;
+            input.dispatchEvent(new Event('change'));
+        }
+    }
+    // for price, discount, subtotal calc logic
+    function priceCalc(qtyContainer, priceContainer, onePrice, discountContainer, subtotalContainer) {
+        let qtyNow = document.getElementById(qtyContainer).value;
+        let priceNow = document.getElementById(priceContainer);
+        let priceSingle = document.getElementById(onePrice).value;
+        let disNow = document.getElementById(discountContainer).value;
+        let subtNow = 0.0;
+
+        // calculate price (price = priceSingle * qtyNow)
+        let price = priceSingle * qtyNow;
+        // show in table
+        priceNow.innerText = price.toFixed(2);
+
+        // calculate subtotal (subtNow = price - disNow)
+        subtNow = price - disNow;
+        // show in table
+        document.getElementById(subtotalContainer).innerText = subtNow.toFixed(2);
+
+        //console.log("QTY: " + qtyNow, "Single Price: " + priceSingle, "Discount: " + disNow, "Subtotal: " + subtNow);
+    }
+    // for all calculations of all table rows
+    function allPriceCalc() {
+        priceCalc('quantity-input-1', 'item-1-price', 'item-1-single-price', 'item-1-discount', 'item-1-subtotal');
+        priceCalc('quantity-input-2', 'item-2-price', 'item-2-single-price', 'item-2-discount', 'item-2-subtotal');
+        priceCalc('quantity-input-3', 'item-3-price', 'item-3-single-price', 'item-3-discount', 'item-3-subtotal');
+        priceCalc('quantity-input-4', 'item-4-price', 'item-4-single-price', 'item-4-discount', 'item-4-subtotal');
+        priceCalc('quantity-input-5', 'item-5-price', 'item-5-single-price', 'item-5-discount', 'item-5-subtotal');
+    }
+</script>
+<script>
+    function collectBillingData() {
+        // Get the table element by its ID
+        const table = document.getElementById("itemsTable");
+
+        // Get all rows inside the tbody
+        let rows = table.querySelectorAll("tbody tr");
+
+        // Iterate through each row
+        rows.forEach(row => {
+            // Initialize an array for the current row
+            let rowData = [];
+
+            // Get all relevant cells in the current row (excluding the button column)
+            let cells = row.querySelectorAll("td, th");
+
+            // Extract text or value from each cell
+            cells.forEach(cell => {
+                // Check if the cell contains an input element
+                let input = cell.querySelector("input");
+                if (input) {
+                    // Add the value of the input to the rowData array
+                    rowData.push(input.value);
+                } else if (cell.id && cell.id.includes("subtotal")) {
+                    // For subtotal, take the inner text
+                    rowData.push(cell.textContent.trim());
+                } else {
+                    // Add the text content of the cell to the rowData array
+                    rowData.push(cell.textContent.trim());
+                }
+            });
+
+            // Add the row data to the allData array
+            allData.push(rowData);
+        });
+
+        // Return or log the collected data (ex: ['0: Name', '1: QTY', '2: Price of a Single Unit', '3: Discount Given', '4: Subtotal', ''])
+        console.log(allData);
+        return allData;
+    }
+
+    function getDataForPaymentModal() {
+        allData = [];
+        let modalAllData = collectBillingData();
+        let t_products = 0; // Total number of products
+        let t_amount = 0; // Total amount (sum of all prices)
+        let item_discounts = 0; // Total of individual item discounts
+        let user_discount = parseFloat(document.getElementById("discount").value) || 0; // User-entered discount in control panel
+        let tax = parseFloat(document.getElementById("tax").value) || 0; // Tax input in the white control panel
+        let g_total = 0; // Grand total
+
+        modalAllData.forEach(rowData => {
+            t_products += parseFloat(rowData[1]) || 0;
+            t_amount += parseFloat(rowData[1] * rowData[2]) || 0; // Price
+            item_discounts += parseFloat(rowData[3]) || 0; // Item discounts
+            g_total += parseFloat(rowData[4]) || 0; // Subtotals
+        });
+
+        // Apply the additional user discount and tax to the grand total
+        g_total = g_total - user_discount + tax;
+
+        // Update the modal with the calculated values
+        document.getElementById("t_products").innerText = t_products.toString();
+        document.getElementById("t_amount").innerText = "Rs. " + t_amount.toFixed(2);
+        document.getElementById("dis").innerText = "Rs. " + (item_discounts + user_discount).toFixed(2); // Total discount (items + user)
+        document.getElementById("_tax").innerText = "Rs. " + tax.toFixed(2);
+        document.getElementById("t_type").innerText = "-";
+        document.getElementById("g_total").innerText = "Rs. " + g_total.toFixed(2);
+
+        // Update the white control panel with the calculated values
+        document.getElementById("wc_qty").innerText = t_products.toString();
+        document.getElementById("wc_t_amount").innerText = "Rs. " + t_amount.toFixed(2);
+        document.getElementById("wc_g_total").innerText = "Rs. " + g_total.toFixed(2);
+        //document.getElementById("discount").value = discount.toFixed(2);
+    }
+
+</script>
+<script>
+    // Hold All btn methods
+    function disableAllItems() {
+        // Get the table element by its ID
+        const table = document.getElementById("itemsTable");
+
+        // Get all rows inside the tbody
+        let rows = table.querySelectorAll("tbody tr");
+
+        // Add a class to the table to indicate items are on hold
+        table.classList.add("items-on-hold");
+
+        // Iterate through each row
+        rows.forEach(row => {
+            // Add a visual class to the row
+            row.classList.add("item-disabled");
+
+            // Disable all input elements in the row
+            let inputs = row.querySelectorAll("input");
+            inputs.forEach(input => {
+                input.disabled = true;
+                input.classList.add("bg-gray-200");
+            });
+
+            // Disable increment/decrement buttons
+            let buttons = row.querySelectorAll("button");
+            buttons.forEach(button => {
+                button.disabled = true;
+                button.classList.add("opacity-50", "cursor-not-allowed");
+            });
+        });
+
+        // Also disable inputs in the white control panel
+        document.getElementById("discount").disabled = true;
+        document.getElementById("payAllBtn").disabled = true;
+        document.getElementById("payAllBtn").classList.add("opacity-50", "cursor-not-allowed");
+        document.getElementById("discount").classList.add("bg-gray-200");
+        document.getElementById("tax").disabled = true;
+        document.getElementById("tax").classList.add("bg-gray-200");
+
+        // Change the "Hold All" button text and style to indicate items are on hold
+        const holdButton = document.getElementById("holdAllBtn");
+        if (holdButton) {
+            document.getElementById("holdBtnText").innerHTML = "Items On Hold";
+            holdButton.classList.remove("bg-black");
+            holdButton.classList.add("bg-yellow-600");
+
+            // Add an onclick to toggle back to normal (enable items)
+            holdButton.onclick = enableAllItems;
+        }
+    }
+
+    /**
+     * Re-enables all input elements in the billing table that were previously disabled
+     */
+    function enableAllItems() {
+        // Get the table element by its ID
+        const table = document.getElementById("itemsTable");
+
+        // Remove the on-hold class from the table
+        table.classList.remove("items-on-hold");
+
+        // Get all rows inside the tbody
+        let rows = table.querySelectorAll("tbody tr");
+
+        // Iterate through each row
+        rows.forEach(row => {
+            // Remove the visual class from the row
+            row.classList.remove("item-disabled");
+
+            // Re-enable all input elements in the row
+            let inputs = row.querySelectorAll("input");
+            inputs.forEach(input => {
+                input.disabled = false;
+                input.classList.remove("bg-gray-200");
+            });
+
+            // Re-enable increment/decrement buttons
+            let buttons = row.querySelectorAll("button");
+            buttons.forEach(button => {
+                button.disabled = false;
+                button.classList.remove("opacity-50", "cursor-not-allowed");
+            });
+        });
+
+        // Re-enable inputs in the white control panel
+        document.getElementById("discount").disabled = false;
+        document.getElementById("payAllBtn").disabled = false;
+        document.getElementById("payAllBtn").classList.remove("opacity-50", "cursor-not-allowed");
+        document.getElementById("discount").classList.remove("bg-gray-200");
+        document.getElementById("tax").disabled = false;
+        document.getElementById("tax").classList.remove("bg-gray-200");
+
+        // Change the button back to "Hold All"
+        const holdButton = document.getElementById("holdAllBtn");
+        if (holdButton) {
+            document.getElementById("holdBtnText").innerText = "Hold All";
+            holdButton.classList.add("bg-black");
+            holdButton.classList.remove("bg-yellow-600");
+
+            // Reset the onclick to the disable function
+            holdButton.onclick = disableAllItems;
+        }
+    }
+
+    // Add the event listener to the "Hold All" button
+    document.addEventListener('DOMContentLoaded', function () {
+        const holdButton = document.getElementById("holdAllBtn");
+        if (holdButton) {
+            holdButton.onclick = disableAllItems;
+        }
+    });
+</script>
+<script>
+    /**
+ * Deletes a row from the billing table and updates all pricing calculations
+ */
+    function deleteRow(button) {
+        // Find the row containing this button
+        const row = button.closest('tr');
+
+        if (!row) return;
+
+        // Confirm deletion
+        if (confirm('Are you sure you want to remove this item?')) {
+            // Remove the row from the table
+            row.remove();
+
+            // Update all calculations
+            allPriceCalc();
+
+            // Update the totals in the white control panel
+            updateTotals();
+        }
+    }
+
+    /**
+     * Updates the total values in the white control panel
+     */
+    function updateTotals() {
+        // Get the table element by its ID
+        const table = document.getElementById("itemsTable");
+
+        // Get all rows inside the tbody
+        let rows = table.querySelectorAll("tbody tr");
+
+        let t_products = 0;   // Total quantity of products
+        let t_amount = 0;     // Total amount before discount and tax
+        let g_total = 0;      // Grand total after discount and tax
+
+        // Calculate totals from each row
+        rows.forEach(row => {
+            // Get quantity
+            const qtyInput = row.querySelector("input[id^='quantity-input-']");
+            const qty = qtyInput ? parseFloat(qtyInput.value) || 0 : 0;
+            t_products += qty;
+
+            // Get subtotal for this row
+            const subtotalCell = row.querySelector("[id$='-subtotal']");
+            const subtotal = subtotalCell ? parseFloat(subtotalCell.textContent) || 0 : 0;
+            g_total += subtotal;
+
+            // Get price for this row
+            const priceCell = row.querySelector("[id$='-price']");
+            const price = priceCell ? parseFloat(priceCell.textContent) || 0 : 0;
+            t_amount += price;
+        });
+
+        // Apply tax
+        const tax = parseFloat(document.getElementById("tax").value) || 0;
+        g_total += tax;
+
+        // Update the display
+        document.getElementById("wc_qty").innerText = t_products.toString();
+        document.getElementById("wc_t_amount").innerText = "Rs. " + t_amount.toFixed(2);
+        document.getElementById("wc_g_total").innerText = "Rs. " + g_total.toFixed(2);
+    }
+
+    /**
+     * Initializes delete buttons on all rows
+     */
+    function initializeDeleteButtons() {
+        // Get all delete buttons in the table
+        const deleteButtons = document.querySelectorAll("button.delete-item");
+
+        // Add click event listeners to each delete button
+        deleteButtons.forEach(button => {
+            button.onclick = function () {
+                deleteRow(this);
+            };
+        });
+    }
+
+    // Initialize delete buttons when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', function () {
+        initializeDeleteButtons();
+    });
+</script>
+<script>
+    /**
+ * Cancels the entire transaction by removing all items from the table and resetting prices
+ */
+    function cancelAll() {
+        // Ask for confirmation before proceeding
+        if (confirm('Are you sure you want to cancel this transaction? All items will be removed.')) {
+            // Get the table element by its ID
+            const table = document.getElementById("itemsTable");
+
+            // Get all rows inside the tbody
+            let tbody = table.querySelector("tbody");
+
+            // Clear all rows from the tbody
+            tbody.innerHTML = '';
+
+            // Reset all inputs in the white control panel
+            document.getElementById("discount").value = "0";
+            document.getElementById("tax").value = "0";
+
+            // Reset all displayed totals
+            document.getElementById("wc_qty").innerText = "0";
+            document.getElementById("wc_t_amount").innerText = "Rs. 0.00";
+            document.getElementById("wc_g_total").innerText = "Rs. 0.00";
+
+            // If there are any saved states or flags for the transaction, reset those too
+            if (typeof window.transactionState !== 'undefined') {
+                window.transactionState = {
+                    isOnHold: false,
+                    isPaid: false,
+                    lastModified: new Date()
+                };
+            }
+
+            // Optional: Show a message that transaction was canceled
+            // showNotification('Transaction canceled successfully');
+        }
+    }
+</script>
+<script>
+    /**
+     * Shows a temporary notification message
+     */
+    function showNotification(message, type = 'success') {
+        // Check if a notification container exists, otherwise create one
+        let container = document.getElementById('notification-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'notification-container';
+            container.style.position = 'fixed';
+            container.style.top = '20px';
+            container.style.right = '20px';
+            container.style.zIndex = '9999';
+            document.body.appendChild(container);
+        }
+
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.style.padding = '10px 20px';
+        notification.style.marginBottom = '10px';
+        notification.style.borderRadius = '5px';
+        notification.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+        notification.style.transition = 'all 0.3s ease';
+
+        // Set color based on type
+        if (type === 'success') {
+            notification.style.backgroundColor = '#4CAF50';
+            notification.style.color = 'white';
+        } else if (type === 'error') {
+            notification.style.backgroundColor = '#F44336';
+            notification.style.color = 'white';
+        } else if (type === 'warning') {
+            notification.style.backgroundColor = '#FF9800';
+            notification.style.color = 'white';
+        }
+
+        // Set message
+        notification.textContent = message;
+
+        // Add to container
+        container.appendChild(notification);
+
+        // Remove after 3 seconds
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            setTimeout(() => {
+                container.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+
+    // Add the event listener to the "Cancel" button
+    document.addEventListener('DOMContentLoaded', function () {
+        const cancelButton = document.querySelector("button:has(svg.bi-slash-circle)");
+        if (cancelButton) {
+            cancelButton.onclick = cancelAll;
+        }
+    });
+</script>
+
+</html>
