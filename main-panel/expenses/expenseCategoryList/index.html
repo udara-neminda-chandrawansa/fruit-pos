@@ -12,22 +12,20 @@
     <link rel="stylesheet" href="../../../styles/common.css">
 </head>
 
-<body class="h-dvh max-lg:h-fit">
+<body class="h-dvh flex flex-col">
     <!--Nav-->
     <div
         class="nav bg-basic w-full py-6 rounded-b-full flex justify-between items-center max-lg:justify-center max-lg:flex-col">
         <span class="flex items-center gap-3 ml-20 max-lg:ml-0 max-sm:scale-75">
             <button onclick="history.go ( -1);"
                 class="rounded-full w-[50px] text-basic aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
-                <img src="./../../../images/common/back.svg" alt="go-back" class="scale-75">
+                <i class="bi bi-chevron-left scale-[1.5]"></i>
             </button>
-            <!--
             <button onclick="window.location.href = '../../../main-panel/';"
                 class="p-2 text-basic rounded-lg bg-white flex gap-3 justify-center items-center hover:scale-90 transition-all">
-                <img src="../../../images/common/go-to-main.png" alt="go-to-main">
+                <i class="bi bi-house scale-[1.2]"></i>
                 Go to Main Panel
             </button>
-            -->
         </span>
         <span class="flex items-center gap-3 mr-20 max-lg:mr-0 max-sm:scale-75">
             <!--Logged User-->
@@ -35,13 +33,13 @@
             <!--log out btn-->
             <button onclick="window.location.href = '../../../';"
                 class="rounded-full w-[50px] text-basic aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
-                <img src="../../../images/common/logout.svg" alt="logout" class="scale-[70%]">
+                <i class="bi bi-box-arrow-left scale-[1.5]"></i>
             </button>
         </span>
     </div>
-    <div class="h-5/6 max-lg:h-[83vh] flex-grow flex flex-col">
+    <div class="flex-grow flex flex-col">
         <!--breadcrumbs + Add new category btn-->
-        <div class="flex justify-between items-center max-md:flex-col max-md:gap-6 px-12 max-sm:px-6 py-5">
+        <div class="flex justify-between items-center max-md:flex-col max-md:gap-6 px-12 max-sm:px-6 pt-5">
             <!--breadcrumbs-->
             <div>
                 <nav class="flex" aria-label="Breadcrumb">
@@ -80,7 +78,8 @@
                 </nav>
             </div>
             <!--add new cat btn-->
-            <button class="p-1 px-3 bg-basic text-white rounded-lg" data-modal-target="default-modal" data-modal-toggle="default-modal">Add New Category</button>
+            <button class="p-1 px-3 bg-basic text-white rounded-lg" data-modal-target="default-modal"
+                data-modal-toggle="default-modal">Add New Category</button>
         </div>
         <!--btn controls-->
         <div class="px-12 max-sm:px-6 py-5 flex w-full items-center max-md:flex-col justify-between gap-3">
@@ -90,7 +89,8 @@
                 <input type="text" id="search_exp_cat"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="Enter category name" required />
-                <button onclick="searchItems('search_exp_cat', 'expensesCatTable', 1);" class="py-3 px-6 bg-basic text-white rounded-lg">Search</button>
+                <button onclick="searchItems('search_exp_cat', 'expensesCatTable', 1);"
+                    class="py-3 px-6 bg-basic text-white rounded-lg">Search</button>
             </div>
             <span class="w-fit max-md:w-full items-center flex gap-3">
                 Show
@@ -101,7 +101,7 @@
             </span>
         </div>
         <!--table-->
-        <div class="px-12 max-sm:px-6 max-lg:min-h-full py-5 overflow-y-auto bg-white flex flex-col flex-grow">
+        <div class="px-12 max-sm:px-6 max-lg:min-h-full max-h-[500px] py-5 overflow-y-auto bg-white flex flex-col flex-grow">
             <span></span>
             <!--table from flowbite-->
             <div class="relative overflow-x-auto">
@@ -232,6 +232,7 @@
                 </table>
             </div>
         </div>
+        <div class="flex-grow"></div>
         <footer
             class="h-[80px] bg-basic max-lg:py-6 max-md:text-sm max-sm:text-xs max-md:flex-col text-center w-full flex items-center text-white justify-center gap-3">
             <p>2025 © All Rights Reserved | Application | Powered by Silicon Radon Networks (Pvt) Ltd</p>
