@@ -1202,24 +1202,24 @@
         const sidebarWatti = document.getElementById('sidebarWatti');
 
         // Default: show Watti
-        btnWatti.classList.add('bg-basic', 'text-white');
-        btnBhanda.classList.remove('bg-basic', 'text-white');
+        btnWatti.classList.add('bg-basic-offset-4', 'text-white');
+        btnBhanda.classList.remove('bg-basic-offset-4', 'text-white');
         sidebarBhanda.classList.add('hidden');
         sidebarWatti.classList.remove('hidden');
 
         btnBhanda.addEventListener('click', function () {
-            btnBhanda.classList.add('bg-basic', 'text-white');
+            btnBhanda.classList.add('bg-basic-offset-4', 'text-white');
             btnBhanda.classList.remove('bg-white', 'text-basic');
-            btnWatti.classList.remove('bg-basic', 'text-white');
+            btnWatti.classList.remove('bg-basic-offset-4', 'text-white');
             btnWatti.classList.add('bg-white', 'text-basic');
             sidebarBhanda.classList.remove('hidden');
             sidebarWatti.classList.add('hidden');
         });
 
         btnWatti.addEventListener('click', function () {
-            btnWatti.classList.add('bg-basic', 'text-white');
+            btnWatti.classList.add('bg-basic-offset-4', 'text-white');
             btnWatti.classList.remove('bg-white', 'text-basic');
-            btnBhanda.classList.remove('bg-basic', 'text-white');
+            btnBhanda.classList.remove('bg-basic-offset-4', 'text-white');
             btnBhanda.classList.add('bg-white', 'text-basic');
             sidebarWatti.classList.remove('hidden');
             sidebarBhanda.classList.add('hidden');
