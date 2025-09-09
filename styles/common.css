@@ -112,6 +112,7 @@
 
 /* Tooltip container */
 .tooltip {
+  color: white !important;
   position: relative;
   display: inline-block;
 }
@@ -122,7 +123,7 @@
   width: 120px;
   background-color: #f0f9fd;
   border: 1px solid var(--primary-color);
-  color: #000;
+  color: #fff;
   text-align: center;
   padding: 5px 0;
   border-radius: 6px;
