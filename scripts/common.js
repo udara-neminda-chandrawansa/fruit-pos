@@ -1,4 +1,4 @@
-const appName = "Fruit POS";
+const appName = "P S Pooja Bhanda";
 
 document.title = `${appName}`;
 

@@ -9,11 +9,11 @@
 }
 
 :root{
-  --primary-color: #ea5f54;
-  --primary-color-offset-1: #ea5f5436;
-  --primary-color-offset-2: #ea5f542B;
-  --primary-color-offset-3: #ea5f540F;
-  --primary-color-offset-4: #ea5f5414;
+  --primary-color: #237600;
+  --primary-color-offset-1: #23760036;
+  --primary-color-offset-2: #2376002B;
+  --primary-color-offset-3: #2376000F;
+  --primary-color-offset-4: #23760014;
 }
 
 .bg-basic{
