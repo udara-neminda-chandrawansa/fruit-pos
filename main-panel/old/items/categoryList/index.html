@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../../../styles/common.css">
 </head>
 
-<body class="h-dvh max-lg:h-fit">
+<body class="flex flex-col h-dvh">
     <!--Nav-->
     <div
         class="nav bg-basic w-full py-6 rounded-b-full flex justify-between items-center max-lg:justify-center max-lg:flex-col">
@@ -37,9 +37,9 @@
             </button>
         </span>
     </div>
-    <div class="h-5/6 max-lg:h-[83vh] flex flex-col">
+    <div class="flex flex-col flex-grow">
         <!--breadcrumbs-->
-        <div class="px-12 max-sm:px-6 py-5">
+        <div class="px-12 max-sm:px-6 pt-5">
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
@@ -75,7 +75,7 @@
                 </ol>
             </nav>
         </div>
-        <div class="flex justify-between items-center px-12 max-sm:px-6 py-5 max-md:flex-col max-md:gap-6">
+        <div class="flex justify-between items-center px-12 max-sm:px-6 pt-5 max-md:flex-col max-md:gap-6">
             <!--search-->
             <div class="flex w-1/2 max-md:w-full items-center gap-3">
                 <label for="search_cat">Search</label>
@@ -89,7 +89,7 @@
                 data-modal-toggle="default-modal">Add New Category</button>
         </div>
         <!--btn controls-->
-        <div class="px-12 max-sm:px-6 py-5 flex w-full items-center max-md:flex-col justify-between gap-3">
+        <div class="px-12 max-sm:px-6 pt-5 flex w-full items-center max-md:flex-col justify-between gap-3">
             <span class="w-fit max-md:w-full max-md:justify-center flex gap-3 max-sm:gap-1 max-[350px]:scale-75">
                 <button class="py-3 px-6 max-sm:px-3 max-sm:py-1 bg-black text-white rounded-lg">Copy</button>
                 <button class="py-3 px-6 max-sm:px-3 max-sm:py-1 bg-black text-white rounded-lg">CSV</button>

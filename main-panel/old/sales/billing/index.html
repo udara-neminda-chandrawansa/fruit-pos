@@ -17,7 +17,7 @@
     let allData = [];
 </script>
 
-<body class="h-dvh max-lg:h-fit" onload="allPriceCalc();">
+<body class="flex flex-col h-dvh" onload="allPriceCalc();">
     <!--Nav-->
     <div
         class="nav bg-basic w-full h-[10%] max-lg:h-[17dvh] max-sm:py-6 rounded-b-full flex justify-between items-center max-lg:justify-center max-lg:flex-col">
@@ -26,13 +26,11 @@
                 class="rounded-full w-[50px] text-basic aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
                 <i class="bi bi-chevron-left scale-[1.5]"></i>
             </button>
-            <!--
             <button onclick="window.location.href = '../../../main-panel/';"
                 class="p-2 text-basic rounded-lg bg-white flex gap-3 justify-center items-center hover:scale-90 transition-all">
                 <i class="bi bi-house scale-[1.2]"></i>
                 Go to Main Panel
             </button>
-            -->
         </span>
         <span class="flex items-center gap-3 mr-20 max-lg:mr-0 max-sm:scale-75">
             <!--Logged User-->
@@ -46,7 +44,7 @@
     </div>
     <div class="h-[90%] flex flex-col">
         <!--breadcrumbs-->
-        <div class="px-12 max-sm:px-6 py-5">
+        <div class="px-12 max-sm:px-6 pt-5">
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
