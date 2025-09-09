@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application | Inventory TrackingInventory Tracking</title>
+    <link rel="icon" href="../../images/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles/common.css">
+</head>
+
+<body class="min-h-dvh flex flex-col max-lg:h-fit">
+    <!--Nav-->
+    <div
+        class="nav bg-basic w-full max-sm:py-6 flex justify-between items-center max-lg:justify-center max-lg:flex-col">
+        <span class="flex items-center gap-3 ml-20 max-lg:ml-0 max-sm:scale-75">
+            <button onclick="history.go ( -1);"
+                class="rounded-full w-[50px] text-basic aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
+                <i class="bi bi-chevron-left scale-[1.5]"></i>
+            </button>
+            <!--
+            <button onclick="window.location.href = '../../../main-panel/';"
+                class="p-2 text-basic rounded-lg bg-white flex gap-3 justify-center items-center hover:scale-90 transition-all">
+                <img src="../../../images/common/go-to-main.png" alt="go-to-main">
+                Go to Main Panel
+            </button>
+            -->
+        </span>
+        <span class="flex items-center gap-3 mr-20 max-lg:mr-0 max-sm:scale-75">
+            <!--Logged User-->
+            <h3 class="text-2xl max-md:text-sm text-white">Welcome User</h3>
+            <!--log out btn-->
+            <button onclick="window.location.href = '../../../';"
+                class="rounded-full w-[50px] text-basic aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
+                <i class="bi bi-box-arrow-left scale-[1.5]"></i>
+            </button>
+        </span>
+    </div>
+    <!--content-->
+    <div class="flex flex-col flex-grow">
+        <!--breadcrumbs-->
+        <div class="px-12 max-sm:px-6 py-5">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li class="inline-flex items-center">
+                        <p class="inline-flex items-center text-sm font-medium text-gray-700">
+                            <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                            </svg>
+                            Main Panel
+                        </p>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 9 4-4-4-4" />
+                            </svg>
+                            <p class="ms-1 text-sm font-medium text-gray-700 md:ms-2">Inventory Tracking</p>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <!--submission controls-->
+
+        <!--search & filter-->
+        <div class="flex max-lg:flex-col">
+            <!--search-->
+            <div class="px-12 max-sm:px-6 py-5 flex lg:w-1/3 items-center gap-3">
+                <label for="search_sale_ret">Search</label>
+                <input type="text" id="search_sale_ret"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    placeholder="Search by product name, code or model no" required />
+                <button onclick="searchItems('search_sale_ret', 'salesRetTable', 1);"
+                    class="py-3 px-6 bg-basic text-white rounded-lg">Search</button>
+            </div>
+            <!--filter-->
+            <div class="pr-12 max-lg:px-12 max-sm:px-6 lg:w-1/3">
+                <form>
+                    <div class="grid gap-6 py-6">
+                        <!--select Location-->
+                        <div class="flex items-center gap-3">
+                            <label for="location">Location</label>
+                            <!--custom combobox-->
+                            <div class="custom-select w-full">
+                                <select id="location" name="location"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 hidden">
+                                    <option value="">Select Location</option>
+                                    <option value="Location 1">Location 1</option>
+                                    <option value="Location 2">Location 2</option>
+                                    <option value="Location 3">Location 3</option>
+                                    <option value="Location 4">Location 4</option>
+                                </select>
+                            </div>
+                            <!--filter btn-->
+                            <div class="">
+                                <button
+                                    class="py-3 px-6 bg-basic text-white rounded-lg place-self-end">Filter</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <!--filter-->
+            <div class="pr-12 max-lg:px-12 max-sm:px-6 lg:w-1/3">
+                <form>
+                    <div class="grid gap-6 py-6">
+                        <!--select Supplier-->
+                        <div class="flex items-center gap-3">
+                            <label for="supplier">Supplier</label>
+                            <!--custom combobox-->
+                            <div class="custom-select w-full">
+                                <select id="supplier" name="supplier"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 hidden">
+                                    <option value="">Select Supplier</option>
+                                    <option value="Supplier 1">Supplier 1</option>
+                                    <option value="Supplier 2">Supplier 2</option>
+                                    <option value="Supplier 3">Supplier 3</option>
+                                    <option value="Supplier 4">Supplier 4</option>
+                                </select>
+                            </div>
+                            <!--filter btn-->
+                            <div class="">
+                                <button
+                                    class="py-3 px-6 bg-basic text-white rounded-lg place-self-end">Filter</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <!--btn controls-->
+        <div class="px-12 max-sm:px-6 py-5 flex w-full items-center max-md:flex-col justify-between gap-3">
+            <span class="w-fit max-md:w-full max-md:justify-center flex gap-3 max-sm:gap-1 max-[350px]:scale-75">
+                <button class="py-3 px-6 max-sm:px-3 max-sm:py-1 bg-black text-white rounded-lg">Copy</button>
+                <button class="py-3 px-6 max-sm:px-3 max-sm:py-1 bg-black text-white rounded-lg">CSV</button>
+                <button class="py-3 px-6 max-sm:px-3 max-sm:py-1 bg-black text-white rounded-lg">Excel</button>
+                <button class="py-3 px-6 max-sm:px-3 max-sm:py-1 bg-black text-white rounded-lg">PDF</button>
+                <button data-popover-target="popover-click" data-popover-trigger="click" data-popover-placement="bottom"
+                    type="button" class="py-3 px-6 max-sm:px-3 max-sm:py-1 bg-black text-white rounded-lg">
+                    Column Visibility
+                </button>
+                <!-- Column Visibility Popover -->
+                <div data-popover id="popover-click" role="tooltip"
+                    class="absolute z-10 invisible inline-block w-fit text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
+                    <ul
+                        class="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg flex flex-col">
+                        <!-- Product ID -->
+                        <li>
+                            <input id="filter_id" type="checkbox" checked class="hidden peer">
+                            <label for="filter_id"
+                                class="w-full flex px-4 py-2 border-b border-gray-200 rounded-t-lg select-none peer-checked:bg-blue-300"
+                                onclick="filterColumn('Product ID', 'productTable');">
+                                Product ID
+                            </label>
+                        </li>
+                        <!-- Name -->
+                        <li>
+                            <input id="filter_name" type="checkbox" checked class="hidden peer">
+                            <label for="filter_name"
+                                class="flex w-full px-4 py-2 border-b border-gray-200 select-none peer-checked:bg-blue-300"
+                                onclick="filterColumn('Name', 'productTable');">
+                                Name
+                            </label>
+                        </li>
+                        <!-- Code -->
+                        <li>
+                            <input id="filter_code" type="checkbox" checked class="hidden peer">
+                            <label for="filter_code"
+                                class="flex w-full px-4 py-2 border-b border-gray-200 select-none peer-checked:bg-blue-300"
+                                onclick="filterColumn('Code', 'productTable');">
+                                Code
+                            </label>
+                        </li>
+                        <!-- Model No -->
+                        <li>
+                            <input id="filter_model" type="checkbox" checked class="hidden peer">
+                            <label for="filter_model"
+                                class="flex w-full px-4 py-2 border-b border-gray-200 select-none peer-checked:bg-blue-300"
+                                onclick="filterColumn('Model No', 'productTable');">
+                                Model No
+                            </label>
+                        </li>
+                        <!-- Supplier -->
+                        <li>
+                            <input id="filter_supplier" type="checkbox" checked class="hidden peer">
+                            <label for="filter_supplier"
+                                class="flex w-full px-4 py-2 border-b border-gray-200 select-none peer-checked:bg-blue-300"
+                                onclick="filterColumn('Supplier', 'productTable');">
+                                Supplier
+                            </label>
+                        </li>
+                        <!-- Purchase Price -->
+                        <li>
+                            <input id="filter_purchase" type="checkbox" checked class="hidden peer">
+                            <label for="filter_purchase"
+                                class="flex w-full px-4 py-2 border-b border-gray-200 select-none peer-checked:bg-blue-300"
+                                onclick="filterColumn('Purchase Price', 'productTable');">
+                                Purchase Price
+                            </label>
+                        </li>
+                        <!-- Selling Price -->
+                        <li>
+                            <input id="filter_selling" type="checkbox" checked class="hidden peer">
+                            <label for="filter_selling"
+                                class="flex w-full px-4 py-2 border-b border-gray-200 select-none peer-checked:bg-blue-300"
+                                onclick="filterColumn('Selling Price', 'productTable');">
+                                Selling Price
+                            </label>
+                        </li>
+                        <!-- Warranty Duration -->
+                        <li>
+                            <input id="filter_warranty_dur" type="checkbox" checked class="hidden peer">
+                            <label for="filter_warranty_dur"
+                                class="flex w-full px-4 py-2 border-b border-gray-200 select-none peer-checked:bg-blue-300"
+                                onclick="filterColumn('Warranty Duration', 'productTable');">
+                                Warranty Duration
+                            </label>
+                        </li>
+                        <!-- Warranty Type -->
+                        <li>
+                            <input id="filter_warranty_type" type="checkbox" checked class="hidden peer">
+                            <label for="filter_warranty_type"
+                                class="flex w-full px-4 py-2 border-b border-gray-200 select-none peer-checked:bg-blue-300"
+                                onclick="filterColumn('Warranty Type', 'productTable');">
+                                Warranty Type
+                            </label>
+                        </li>
+                        <!-- Free Issue -->
+                        <li>
+                            <input id="filter_free_issue" type="checkbox" checked class="hidden peer">
+                            <label for="filter_free_issue"
+                                class="flex w-full px-4 py-2 border-b border-gray-200 select-none peer-checked:bg-blue-300"
+                                onclick="filterColumn('Free Issue', 'productTable');">
+                                Free Issue
+                            </label>
+                        </li>
+                        <!-- Created At -->
+                        <li>
+                            <input id="filter_created" type="checkbox" checked class="hidden peer">
+                            <label for="filter_created"
+                                class="flex w-full px-4 py-2 border-b border-gray-200 select-none peer-checked:bg-blue-300"
+                                onclick="filterColumn('Created At', 'productTable');">
+                                Created At
+                            </label>
+                        </li>
+                        <!-- Modified At -->
+                        <li>
+                            <input id="filter_modified" type="checkbox" checked class="hidden peer">
+                            <label for="filter_modified"
+                                class="w-full flex px-4 py-2 border-b border-gray-200 rounded-b-lg select-none peer-checked:bg-blue-300"
+                                onclick="filterColumn('Modified At', 'productTable');">
+                                Modified At
+                            </label>
+                        </li>
+                    </ul>
+                    <div data-popper-arrow></div>
+                </div>
+            </span>
+            <span class="w-fit max-md:w-full items-center flex gap-3">
+                Show
+                <input type="text" id="col_num"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    placeholder="30" required />
+                Entries
+            </span>
+        </div>
+        <!--table-->
+        <div class="px-12 max-sm:px-6 max-lg:min-h-full py-5 overflow-y-auto bg-white flex flex-col">
+            <span></span>
+            <!--table from flowbite-->
+            <div class="relative overflow-x-auto">
+                <table id="productTable" class="w-full text-sm text-left rtl:text-right text-gray-500">
+                    <thead class="text-xs text-white uppercase bg-basic">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 rounded-tl-lg">Product ID</th>
+                            <th scope="col" class="px-6 py-3">Name</th>
+                            <th scope="col" class="px-6 py-3">Code</th>
+                            <th scope="col" class="px-6 py-3">Model No</th>
+                            <th scope="col" class="px-6 py-3">Supplier</th>
+                            <th scope="col" class="px-6 py-3">Purchase Price</th>
+                            <th scope="col" class="px-6 py-3">Selling Price</th>
+                            <th scope="col" class="px-6 py-3">Warranty Duration</th>
+                            <th scope="col" class="px-6 py-3">Warranty Type</th>
+                            <th scope="col" class="px-6 py-3">Free Issue</th>
+                            <th scope="col" class="px-6 py-3">Created At</th>
+                            <th scope="col" class="px-6 py-3">Modified At</th>
+                            <th scope="col" class="px-6 py-3 rounded-tr-lg">Low Stock Threshold</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample Row 1 -->
+                        <tr class="bg-white border-2 text-black">
+                            <td class="px-6 py-4">P-1001</td>
+                            <td class="px-6 py-4 font-medium">Laptop Pro X1</td>
+                            <td class="px-6 py-4">LP-X1-2024</td>
+                            <td class="px-6 py-4">X1C9</td>
+                            <td class="px-6 py-4">TechSuppliers Inc.</td>
+                            <td class="px-6 py-4">$899.00</td>
+                            <td class="px-6 py-4">$1,299.00</td>
+                            <td class="px-6 py-4">24</td>
+                            <td class="px-6 py-4">months</td>
+                            <td class="px-6 py-4"><span class="p-2 rounded-lg bg-red-100 text-red-800">No</span></td>
+                            <td class="px-6 py-4">2024-01-15</td>
+                            <td class="px-6 py-4">2024-06-20</td>
+                            <td class="px-6 py-4">
+                                <input type="number"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    placeholder="0" min="0" required />
+                            </td>
+                        </tr>
+                        <!-- Sample Row 2 -->
+                        <tr class="bg-white border-2 text-black">
+                            <td class="px-6 py-4">P-1002</td>
+                            <td class="px-6 py-4 font-medium">Wireless Mouse</td>
+                            <td class="px-6 py-4">WM-200</td>
+                            <td class="px-6 py-4">WM2.4G</td>
+                            <td class="px-6 py-4">PeriPharma Co.</td>
+                            <td class="px-6 py-4">$12.50</td>
+                            <td class="px-6 py-4">$24.99</td>
+                            <td class="px-6 py-4">365</td>
+                            <td class="px-6 py-4">days</td>
+                            <td class="px-6 py-4"><span class="p-2 rounded-lg bg-green-100 text-green-800">Yes</span>
+                            </td>
+                            <td class="px-6 py-4">2024-03-10</td>
+                            <td class="px-6 py-4">2024-03-10</td>
+                            <td class="px-6 py-4">
+                                <input type="number"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    placeholder="0" min="0" required />
+                            </td>
+                        </tr>
+                        <!-- Sample Row 3 -->
+                        <tr class="bg-white border-2 text-black">
+                            <td class="px-6 py-4">P-1003</td>
+                            <td class="px-6 py-4 font-medium">4K Monitor</td>
+                            <td class="px-6 py-4">MON-4K-27</td>
+                            <td class="px-6 py-4">U27P3</td>
+                            <td class="px-6 py-4">DisplayTech Ltd.</td>
+                            <td class="px-6 py-4">$299.00</td>
+                            <td class="px-6 py-4">$499.00</td>
+                            <td class="px-6 py-4">36</td>
+                            <td class="px-6 py-4">months</td>
+                            <td class="px-6 py-4"><span class="p-2 rounded-lg bg-red-100 text-red-800">No</span></td>
+                            <td class="px-6 py-4">2024-02-05</td>
+                            <td class="px-6 py-4">2024-05-15</td>
+                            <td class="px-6 py-4">
+                                <input type="number"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    placeholder="0" min="0" required />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+    <footer
+        class="h-[80px] bg-basic max-md:text-sm max-sm:text-xs max-md:flex-col text-center w-full flex items-center text-white justify-center gap-3">
+        <p>Copyright</p>
+        <p>Powered By <strong>Silicon Radon Networks (PVT) Ltd.</strong> All rights reserved.</p>
+    </footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+<script src="../../scripts/common.js"></script>
+
+</html>

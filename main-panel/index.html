@@ -13,9 +13,9 @@
 <body class="h-dvh max-md:h-fit">
     <!--Nav-->
     <div
-        class="nav bg-basic w-full h-1/6 max-lg:h-[17dvh] max-sm:py-6 flex justify-between items-center max-sm:justify-center">
+        class="nav bg-basic w-full py-6 flex justify-between items-center max-sm:justify-center">
         <span class=" sm:ml-20">
-            <img src="../images/logo.png" alt="" class="w-[200px] max-md:w-20">
+            <img src="../images/logo.png" alt="" class="w-[120px] max-md:w-20">
         </span>
         <span class="flex gap-3 sm:mr-20 items-center">
             <!--Logged User-->
@@ -23,7 +23,7 @@
             <!--log out btn-->
             <button onclick="window.location.href = '../';"
                 class="rounded-full w-[50px] text-basic aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
-                <img src="../images/common/logout.svg" alt="logout" class="scale-[70%]">
+                <i class="bi bi-box-arrow-left scale-[1.5]"></i>
         </span>
         </button>
     </div>
@@ -37,6 +37,24 @@
                 <img src="../images/main-panel/btn-icons/product-management.png"
                     class="w-[105px] h-[105px] max-xl:w-[70px] max-xl:h-[70px]" alt="">
                 <p class="text-center">Fruit Management</p>
+            </div>
+            <div onclick="locatePanelItem('warehouse-mgmt');"
+                class="w-[200px] max-lg:w-[150px] h-[200px] max-lg:h-[150px] bg-basic rounded-lg flex flex-col gap-3 justify-center items-center hover:scale-90 transition-all cursor-pointer uppercase lg:text-xl">
+                <img src="../images/main-panel/btn-icons/product-management.png"
+                    class="w-[105px] h-[105px] max-xl:w-[70px] max-xl:h-[70px]" alt="">
+                <p class="text-center">Branch Management</p>
+            </div>
+            <div onclick="locatePanelItem('users');"
+                class="w-[200px] max-lg:w-[150px] h-[200px] max-lg:h-[150px] bg-basic rounded-lg flex flex-col gap-3 justify-center items-center hover:scale-90 transition-all cursor-pointer uppercase lg:text-xl">
+                <img src="../images/main-panel/btn-icons/product-management.png"
+                    class="w-[105px] h-[105px] max-xl:w-[70px] max-xl:h-[70px]" alt="">
+                <p class="text-center">Users</p>
+            </div>
+            <div onclick="locatePanelItem('suppliers');"
+                class="w-[200px] max-lg:w-[150px] h-[200px] max-lg:h-[150px] bg-basic rounded-lg flex flex-col gap-3 justify-center items-center hover:scale-90 transition-all cursor-pointer uppercase lg:text-xl">
+                <img src="../images/main-panel/btn-icons/product-management.png"
+                    class="w-[105px] h-[105px] max-xl:w-[70px] max-xl:h-[70px]" alt="">
+                <p class="text-center">Suppliers</p>
             </div>
         </div>
     </div>

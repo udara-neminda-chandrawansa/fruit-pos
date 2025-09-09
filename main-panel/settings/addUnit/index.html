@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application | Items</title>
+    <link rel="icon" href="./images/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" href="../../../styles/common.css">
+</head>
+
+<body class="h-dvh flex flex-col">
+    <!--Nav-->
+    <div
+        class="nav bg-basic w-full max-sm:py-6 rounded-b-full flex justify-between items-center max-lg:justify-center max-lg:flex-col">
+        <span class="flex items-center gap-3 ml-20 max-lg:ml-0 max-sm:scale-75">
+            <button onclick="history.go ( -1);"
+                class="rounded-full w-[50px] text-basic aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
+                <img src="./../../../images/common/back.svg" alt="go-back" class="scale-75">
+            </button>
+            <!--
+            <button onclick="window.location.href = '../../../main-panel/';"
+                class="p-2 text-basic rounded-lg bg-white flex gap-3 justify-center items-center hover:scale-90 transition-all">
+                <img src="../../../images/common/go-to-main.png" alt="go-to-main">
+                Go to Main Panel
+            </button>
+            -->
+        </span>
+        <span class="flex items-center gap-3 mr-20 max-lg:mr-0 max-sm:scale-75">
+            <!--Logged User-->
+            <h3 class="text-2xl max-md:text-sm text-white">Welcome User</h3>
+            <!--log out btn-->
+            <button onclick="window.location.href = '../../../';"
+                class="rounded-full w-[50px] text-basic aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
+                <img src="../../../images/common/logout.svg" alt="logout" class="scale-[70%]">
+            </button>
+        </span>
+    </div>
+    <div class="flex-grow flex flex-col">
+        <!--breadcrumbs-->
+        <div class="px-12 max-sm:px-6 py-5">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li class="inline-flex items-center">
+                        <p class="inline-flex items-center text-sm font-medium text-gray-700">
+                            <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                            </svg>
+                            Main Panel
+                        </p>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 9 4-4-4-4" />
+                            </svg>
+                            <p class="ms-1 text-sm font-medium text-gray-700 md:ms-2">Settings</p>
+                        </div>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 9 4-4-4-4" />
+                            </svg>
+                            <p class="ms-1 text-sm font-medium text-gray-700 md:ms-2">Add New Unit</p>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <!--main panel-->
+        <div class="p-6">
+            <div class="flex flex-grow flex-col border-2 h-full rounded-lg p-6">
+                <div class="grid gap-6 mb-6 md:grid-cols-1">
+                    <div>
+                        <label for="unit_name" class="block mb-2 text-sm font-medium text-black ">Unit Name</label>
+                        <input type="text" id="unit_name"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                            placeholder="Enter unit name" required />
+                    </div>
+                </div>
+                <div class="grid mb-6">
+                    <div>
+                        <label for="desc" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+                        <textarea id="desc" rows="4"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Enter Description"></textarea>
+                    </div>
+                </div>
+                <div class="flex justify-center items-center w-full gap-4 max-sm:flex-col">
+                    <button
+                        class="py-3 px-6 bg-basic text-white rounded-lg max-sm:py-1 max-sm:px-3 max-sm:w-full">Save</button>
+                        <button
+                        class="py-3 px-6 bg-black text-white rounded-lg max-sm:py-1 max-sm:px-3 max-sm:w-full">Reset</button>
+                        <button
+                        class="py-3 px-6 bg-red-600 text-white rounded-lg max-sm:py-1 max-sm:px-3 max-sm:w-full">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class="flex-grow"></div>
+        <footer
+            class="h-[80px] bg-basic max-md:text-sm max-sm:text-xs max-md:flex-col text-center w-full flex items-center text-white justify-center gap-3">
+            <p>2025 © All Rights Reserved | Application | Powered by Silicon Radon Networks (Pvt) Ltd</p>
+        </footer>
+
+    </div>
+</body>
+<script src="../../../scripts/common.js"></script>
+
+</html>
