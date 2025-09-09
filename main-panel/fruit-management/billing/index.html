@@ -74,16 +74,21 @@
         </div>
         <!--main content-->
         <div class="flex px-12 max-sm:px-6 pb-5 gap-2 overflow-y-auto max-xl:flex-col h-full">
-            <!--blue div + textfields + table-->
+            <!--left head + textfields + table-->
             <div class="bg-white flex flex-col rounded-lg border-2 border-[#00000096] xl:w-2/3">
                 <div class="flex flex-col">
-                    <!--blue div-->
-                    <span
-                        class="bg-basic h-20 max-sm:h-fit rounded-t-md flex max-lg:flex-col max-lg:py-1 justify-between px-4 items-center">
-                        <span class="flex gap-3 text-white max-sm:text-sm max-sm:w-full">
-                            <p>Sales Invoice</p>
-                            <p>Branch: Colombo</p>
-                        </span>
+                    <!--left head-->
+                    <span class="flex bg-basic gap-3 p-3 rounded-t-md text-white max-sm:text-sm max-sm:w-full items-center">
+                        <p>Sales Invoice</p>
+                        <p>Branch: Colombo</p>
+                        <div class="flex gap-2 ml-4">
+                            <button id="btnBhanda" type="button"
+                                class="px-4 py-2 rounded-lg bg-white text-basic font-semibold shadow hover:bg-basic hover:text-white transition">Pooja
+                                Bhanda</button>
+                            <button id="btnWatti" type="button"
+                                class="px-4 py-2 rounded-lg bg-basic text-white font-semibold shadow hover:bg-white hover:text-basic transition">Pooja
+                                Watti</button>
+                        </div>
                     </span>
                     <!--textfields-->
                     <div class="h-fit p-2 flex gap-3 max-sm:flex-col max-sm:items-center">
@@ -277,8 +282,23 @@
                 </div>
                 -->
                 <!--sidebar products cards-->
-                <div
+                <div id="sidebarBhanda" class="hidden grid grid-cols-1 gap-3 overflow-y-auto p-3">
+                    <div class="bg-basic-offset-3 flex flex-col justify-between rounded-md p-4">
+                        <span class="font-bold text-basic text-lg">Sri Gana Devi - 16 inch</span>
+                    </div>
+                    <div class="bg-basic-offset-3 flex flex-col justify-between rounded-md p-4">
+                        <span class="font-bold text-basic text-lg">Sri Dedimunda Devi - 16 inch</span>
+                    </div>
+                    <div class="bg-basic-offset-3 flex flex-col justify-between rounded-md p-4">
+                        <span class="font-bold text-basic text-lg">Sri Vishnu Devi - 16 inch</span>
+                    </div>
+                    <div class="bg-basic-offset-3 flex flex-col justify-between rounded-md p-4">
+                        <span class="font-bold text-basic text-lg">Sri Katharagama Devi Devi - 16 inch</span>
+                    </div>
+                </div>
+                <div id="sidebarWatti"
                     class="grid grid-cols-3 max-xl:grid-cols-5 max-lg:grid-cols-4 max-[600px]:grid-cols-3 max-[400px]:grid-cols-2 gap-3 overflow-y-auto p-3">
+                    <!-- Existing fruit basket cards here -->
                     <div class="bg-basic-offset-3 xl:h-[160px] max-xl:aspect-[4/5] flex flex-col justify-between rounded-md"
                         data-tooltip-target="tooltip-top1" data-tooltip-placement="top">
 
@@ -291,8 +311,8 @@
                                 Fruit Basket
                                 <div class="tooltip-arrow" data-popper-arrow></div>
                             </div>
-                            <img class="object-contain h-1/2 w-full" src="../../../images/common/sample-fruit-basket.jpeg"
-                                alt="sample_prod" />
+                            <img class="object-contain h-1/2 w-full"
+                                src="../../../images/common/sample-fruit-basket.jpeg" alt="sample_prod" />
                             <span class="flex flex-col text-xs text-center h-fit">
                                 <p class="truncate">Fruit Basket</p>
                                 <p class="truncate">200.00</p>
@@ -311,8 +331,8 @@
                                 Fruit Basket
                                 <div class="tooltip-arrow" data-popper-arrow></div>
                             </div>
-                            <img class="object-contain h-1/2 w-full" src="../../../images/common/sample-fruit-basket.jpeg"
-                                alt="sample_prod" />
+                            <img class="object-contain h-1/2 w-full"
+                                src="../../../images/common/sample-fruit-basket.jpeg" alt="sample_prod" />
                             <span class="flex flex-col text-xs text-center h-fit">
                                 <p class="truncate">Fruit Basket</p>
                                 <p class="truncate">200.00</p>
@@ -331,8 +351,8 @@
                                 Fruit Basket
                                 <div class="tooltip-arrow" data-popper-arrow></div>
                             </div>
-                            <img class="object-contain h-1/2 w-full" src="../../../images/common/sample-fruit-basket.jpeg"
-                                alt="sample_prod" />
+                            <img class="object-contain h-1/2 w-full"
+                                src="../../../images/common/sample-fruit-basket.jpeg" alt="sample_prod" />
                             <span class="flex flex-col text-xs text-center h-fit">
                                 <p class="truncate">Fruit Basket</p>
                                 <p class="truncate">200.00</p>
@@ -351,8 +371,8 @@
                                 Fruit Basket
                                 <div class="tooltip-arrow" data-popper-arrow></div>
                             </div>
-                            <img class="object-contain h-1/2 w-full" src="../../../images/common/sample-fruit-basket.jpeg"
-                                alt="sample_prod" />
+                            <img class="object-contain h-1/2 w-full"
+                                src="../../../images/common/sample-fruit-basket.jpeg" alt="sample_prod" />
                             <span class="flex flex-col text-xs text-center h-fit">
                                 <p class="truncate">Fruit Basket</p>
                                 <p class="truncate">200.00</p>
@@ -371,8 +391,8 @@
                                 Fruit Basket
                                 <div class="tooltip-arrow" data-popper-arrow></div>
                             </div>
-                            <img class="object-contain h-1/2 w-full" src="../../../images/common/sample-fruit-basket.jpeg"
-                                alt="sample_prod" />
+                            <img class="object-contain h-1/2 w-full"
+                                src="../../../images/common/sample-fruit-basket.jpeg" alt="sample_prod" />
                             <span class="flex flex-col text-xs text-center h-fit">
                                 <p class="truncate">Fruit Basket</p>
                                 <p class="truncate">200.00</p>
@@ -391,8 +411,8 @@
                                 Fruit Basket
                                 <div class="tooltip-arrow" data-popper-arrow></div>
                             </div>
-                            <img class="object-contain h-1/2 w-full" src="../../../images/common/sample-fruit-basket.jpeg"
-                                alt="sample_prod" />
+                            <img class="object-contain h-1/2 w-full"
+                                src="../../../images/common/sample-fruit-basket.jpeg" alt="sample_prod" />
                             <span class="flex flex-col text-xs text-center h-fit">
                                 <p class="truncate">Fruit Basket</p>
                                 <p class="truncate">200.00</p>
@@ -1172,6 +1192,38 @@
         if (cancelButton) {
             cancelButton.onclick = cancelAll;
         }
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const btnBhanda = document.getElementById('btnBhanda');
+        const btnWatti = document.getElementById('btnWatti');
+        const sidebarBhanda = document.getElementById('sidebarBhanda');
+        const sidebarWatti = document.getElementById('sidebarWatti');
+
+        // Default: show Watti
+        btnWatti.classList.add('bg-basic', 'text-white');
+        btnBhanda.classList.remove('bg-basic', 'text-white');
+        sidebarBhanda.classList.add('hidden');
+        sidebarWatti.classList.remove('hidden');
+
+        btnBhanda.addEventListener('click', function () {
+            btnBhanda.classList.add('bg-basic', 'text-white');
+            btnBhanda.classList.remove('bg-white', 'text-basic');
+            btnWatti.classList.remove('bg-basic', 'text-white');
+            btnWatti.classList.add('bg-white', 'text-basic');
+            sidebarBhanda.classList.remove('hidden');
+            sidebarWatti.classList.add('hidden');
+        });
+
+        btnWatti.addEventListener('click', function () {
+            btnWatti.classList.add('bg-basic', 'text-white');
+            btnWatti.classList.remove('bg-white', 'text-basic');
+            btnBhanda.classList.remove('bg-basic', 'text-white');
+            btnBhanda.classList.add('bg-white', 'text-basic');
+            sidebarWatti.classList.remove('hidden');
+            sidebarBhanda.classList.add('hidden');
+        });
     });
 </script>
 
