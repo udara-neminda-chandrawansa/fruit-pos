@@ -235,7 +235,7 @@
             if (existingIndex !== -1) {
                 selectedFruits.splice(existingIndex, 1);
             } else {
-                selectedFruits.push({ ...fruit, quantity: 1 });
+                selectedFruits.push({ ...fruit, quantity: .5 });
             }
 
             updateSelectedFruits();
@@ -264,7 +264,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <button onclick="updateQuantity(${fruit.id}, -1)" class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors">-</button>
-                    <span class="w-8 text-center font-medium">${fruit.quantity}</span>
+                    <span class="w-8 text-center font-medium">${fruit.quantity.toFixed(1)}</span>
                     <button onclick="updateQuantity(${fruit.id}, 1)" class="w-8 h-8 rounded-full hover:bg-gray-300 flex items-center justify-center transition-colors" style="background-color: var(--primary-color); color: white;">+</button>
                     <button onclick="removeSelectedFruit(${fruit.id})" class="ml-2 w-8 h-8 rounded-full bg-red-500 hover:bg-red-600 flex items-center justify-center transition-colors text-white" title="Remove">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -292,7 +292,7 @@
         function updateQuantity(fruitId, change) {
             const fruit = selectedFruits.find(sf => sf.id === fruitId);
             if (fruit) {
-                fruit.quantity = Math.max(1, fruit.quantity + change);
+                fruit.quantity = Math.max(0.5, Math.round((fruit.quantity + change * 0.5) * 2) / 2);
                 updateSelectedFruits();
             }
         }
