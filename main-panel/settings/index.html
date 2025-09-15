@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../../styles/common.css" />
 </head>
 
-<body class="h-dvh">
+<body class="h-dvh flex flex-col">
     <!--Nav-->
     <div
         class="nav bg-basic w-full py-6 flex justify-between items-center max-lg:justify-center max-lg:flex-col">
@@ -38,7 +38,7 @@
     </div>
     <div class="flex flex-col flex-grow items-center">
         <!--breadcrumbs-->
-        <div class="px-12 max-sm:px-6 pt-5 w-full">
+        <div class="px-12 max-sm:px-6 pt-5 max-[375px]:py-5 w-full">
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
@@ -122,6 +122,7 @@
         </div>
     </div>
 </body>
+<script src="../../scripts/common.js"></script>
 <script>
     function locatePanelItem(panelItem) {
         window.location.href = "../../main-panel/settings/" + panelItem;
